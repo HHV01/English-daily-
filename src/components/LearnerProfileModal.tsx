@@ -180,6 +180,34 @@ export default function LearnerProfileModal({ isOpen, onClose, profile, onSave }
             </div>
           </div>
 
+          {/* Gemini API Key */}
+          <div className="pt-2 border-t border-slate-100 space-y-2">
+            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider flex items-center justify-between">
+              <span className="flex items-center gap-1.5">
+                <Sparkles className="w-4 h-4 text-indigo-600" />
+                Gemini API Key (Tùy chọn)
+              </span>
+              <a
+                href="https://aistudio.google.com/app/apikey"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[11px] text-blue-600 hover:underline normal-case font-medium"
+              >
+                Lấy key miễn phí
+              </a>
+            </label>
+            <input
+              type="text"
+              value={formData.customApiKey || ''}
+              onChange={(e) => setFormData({ ...formData, customApiKey: e.target.value })}
+              placeholder="AIzaSy... (dán mã key của bạn vào đây)"
+              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-hidden focus:ring-2 focus:ring-blue-500 text-slate-800 font-mono text-xs bg-slate-50 focus:bg-white"
+            />
+            <p className="text-[11px] text-slate-500 leading-relaxed">
+              Mã key được lưu bảo mật trong trình duyệt của bạn để kích hoạt tính năng chấm bài AI và luyện nói với Dev.
+            </p>
+          </div>
+
           {/* Foreign Client toggle */}
           <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
             <div className="flex items-center gap-3">

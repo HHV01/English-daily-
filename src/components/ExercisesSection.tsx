@@ -126,7 +126,10 @@ export default function ExercisesSection({
     try {
       const res = await fetch('/api/gemini/evaluate-roleplay', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(learnerProfile?.customApiKey ? { 'x-gemini-api-key': learnerProfile.customApiKey } : {}),
+        },
         body: JSON.stringify({
           learnerProfile,
           scenario: roleplayScenario.scenarioVi,

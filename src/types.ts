@@ -7,6 +7,7 @@ export interface LearnerProfile {
   tools: string[];
   testTypes: string[];
   worksWithForeignClients: boolean;
+  customApiKey?: string;
 }
 
 export interface VocabularyItem {

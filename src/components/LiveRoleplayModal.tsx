@@ -72,7 +72,10 @@ export default function LiveRoleplayModal({ isOpen, onClose, learnerProfile, cur
     try {
       const res = await fetch('/api/gemini/roleplay-chat', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(learnerProfile?.customApiKey ? { 'x-gemini-api-key': learnerProfile.customApiKey } : {}),
+        },
         body: JSON.stringify({
           partnerRole,
           topic: currentTopic,

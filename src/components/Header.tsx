@@ -1,5 +1,5 @@
 import { LearnerProfile } from '../types';
-import { Calendar, User, BookMarked, MessageSquare, Flame, Sparkles, CheckCircle2, Table } from 'lucide-react';
+import { Calendar, User, BookMarked, MessageSquare, Flame, Sparkles, CheckCircle2, Table, Key } from 'lucide-react';
 
 interface Props {
   learnerProfile: LearnerProfile;
@@ -8,6 +8,8 @@ interface Props {
   completedDaysCount: number;
   savedWordsCount: number;
   streakCount: number;
+  hasApiKey: boolean;
+  onOpenApiKey: () => void;
   onOpenCurriculum: () => void;
   onOpenProfile: () => void;
   onOpenSavedWords: () => void;
@@ -22,6 +24,8 @@ export default function Header({
   completedDaysCount,
   savedWordsCount,
   streakCount,
+  hasApiKey,
+  onOpenApiKey,
   onOpenCurriculum,
   onOpenProfile,
   onOpenSavedWords,
@@ -103,6 +107,20 @@ export default function Header({
           >
             <MessageSquare className="w-4 h-4 text-indigo-600" />
             <span className="hidden md:inline">Chat với Dev</span>
+          </button>
+
+          {/* API Key button */}
+          <button
+            onClick={onOpenApiKey}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-semibold transition-all ${
+              hasApiKey
+                ? 'bg-emerald-50 border-emerald-300 text-emerald-800 hover:bg-emerald-100'
+                : 'bg-amber-50 border-amber-300 text-amber-800 hover:bg-amber-100 shadow-xs animate-pulse'
+            }`}
+            title="Cài đặt Gemini API Key để kích hoạt tính năng AI"
+          >
+            <Key className={`w-3.5 h-3.5 ${hasApiKey ? 'text-emerald-600' : 'text-amber-600'}`} />
+            <span className="hidden sm:inline">{hasApiKey ? 'API Key: Đã bật' : 'Cài đặt API Key'}</span>
           </button>
 
           {/* Profile button */}

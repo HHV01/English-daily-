@@ -50,7 +50,10 @@ export default function ShortWritingSection({ task, learnerProfile, onWritingSub
     try {
       const res = await fetch('/api/gemini/evaluate-writing', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(learnerProfile?.customApiKey ? { 'x-gemini-api-key': learnerProfile.customApiKey } : {}),
+        },
         body: JSON.stringify({
           learnerProfile,
           writingTask: task,

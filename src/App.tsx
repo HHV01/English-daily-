@@ -15,6 +15,7 @@ import DailyTipCard from './components/DailyTipCard';
 import LiveRoleplayModal from './components/LiveRoleplayModal';
 import SavedWordsModal from './components/SavedWordsModal';
 import LearningTrackerModal from './components/LearningTrackerModal';
+import ApiKeyModal from './components/ApiKeyModal';
 import { Sparkles, Calendar, CheckCircle2, ChevronLeft, ChevronRight, BookOpen, AlertCircle, RefreshCw, MessageSquare, Layers } from 'lucide-react';
 
 const DEFAULT_PROFILE: LearnerProfile = {
@@ -79,6 +80,7 @@ export default function App() {
   const [isSavedWordsOpen, setIsSavedWordsOpen] = useState<boolean>(false);
   const [isLiveChatOpen, setIsLiveChatOpen] = useState<boolean>(false);
   const [isTrackerOpen, setIsTrackerOpen] = useState<boolean>(false);
+  const [isApiKeyModalOpen, setIsApiKeyModalOpen] = useState<boolean>(false);
 
   // Daily learning assessment state (for Learning Tracker sync)
   const [currentQuizScore, setCurrentQuizScore] = useState<number>(9);
@@ -127,7 +129,10 @@ export default function App() {
     try {
       const res = await fetch('/api/gemini/generate-lesson', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(profile?.customApiKey ? { 'x-gemini-api-key': profile.customApiKey } : {}),
+        },
         body: JSON.stringify({
           learnerProfile: profile,
           weekNumber: week,
@@ -266,6 +271,8 @@ export default function App() {
         completedDaysCount={completedDays.length}
         savedWordsCount={savedWordsList.length}
         streakCount={streakCount}
+        hasApiKey={Boolean(profile.customApiKey)}
+        onOpenApiKey={() => setIsApiKeyModalOpen(true)}
         onOpenCurriculum={() => setIsCurriculumOpen(true)}
         onOpenProfile={() => setIsProfileOpen(true)}
         onOpenSavedWords={() => setIsSavedWordsOpen(true)}
@@ -553,6 +560,15 @@ export default function App() {
         currentQuizScore={currentQuizScore}
         currentWritingSubmitted={currentWritingSubmitted}
         currentWritingScore1to5={currentWritingScore1to5}
+      />
+
+      <ApiKeyModal
+        isOpen={isApiKeyModalOpen}
+        onClose={() => setIsApiKeyModalOpen(false)}
+        apiKey={profile.customApiKey || ''}
+        onSaveApiKey={(newKey) => {
+          setProfile((prev) => ({ ...prev, customApiKey: newKey }));
+        }}
       />
     </div>
   );

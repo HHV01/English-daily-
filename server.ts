@@ -9,33 +9,39 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-// Initialize Gemini SDK with User-Agent header
-const ai = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY,
-  httpOptions: {
-    headers: {
-      "User-Agent": "aistudio-build",
+// Helper to get GoogleGenAI client from request header, body, or server env
+function getAiClient(req: express.Request): GoogleGenAI {
+  const customKey = (req.headers['x-gemini-api-key'] as string) || req.body?.customApiKey || req.body?.learnerProfile?.customApiKey;
+  const apiKey = (customKey && customKey.trim()) || process.env.GEMINI_API_KEY;
+  if (!apiKey || apiKey.trim() === "") {
+    throw new Error("MISSING_API_KEY");
+  }
+  return new GoogleGenAI({
+    apiKey: apiKey.trim(),
+    httpOptions: {
+      headers: {
+        "User-Agent": "aistudio-build",
+      },
     },
-  },
-});
+  });
+}
 
 // Helper to format Gemini API errors into actionable, easy-to-understand Vietnamese explanations
-function formatGeminiError(error: any): string {
-  if (!process.env.GEMINI_API_KEY || process.env.GEMINI_API_KEY.trim() === "") {
-    return "Chưa cấu hình GEMINI_API_KEY trên máy chủ (Render/file .env). Vui lòng thêm biến môi trường GEMINI_API_KEY để kích hoạt tính năng chấm bài AI.";
+function formatGeminiError(error: any, req?: express.Request): string {
+  const customKey = req ? (req.headers['x-gemini-api-key'] as string) || req.body?.customApiKey || req.body?.learnerProfile?.customApiKey : null;
+  const hasKey = Boolean((customKey && customKey.trim()) || process.env.GEMINI_API_KEY);
+  if (!hasKey || error?.message === "MISSING_API_KEY") {
+    return "Chưa cấu hình GEMINI_API_KEY. Vui lòng bấm vào nút 🔑 'Cài đặt API Key' ở góc trên cùng trang web để dán mã key của bạn!";
   }
   const msg = error?.message || String(error);
-  if (msg.includes("API_KEY_INVALID") || msg.includes("API key not valid") || msg.includes("forbidden") || msg.includes("403")) {
-    return "Mã GEMINI_API_KEY không hợp lệ hoặc đã bị vô hiệu hóa. Vui lòng kiểm tra lại API Key từ Google AI Studio (https://aistudio.google.com/app/apikey).";
+  if (msg.includes("API_KEY_INVALID") || msg.includes("API key not valid") || msg.includes("forbidden") || msg.includes("403") || msg.includes("leaked")) {
+    return "Mã GEMINI_API_KEY không hợp lệ hoặc đã bị vô hiệu hóa. Vui lòng bấm vào nút 🔑 'Cài đặt API Key' để dán mã Key mới từ Google AI Studio (https://aistudio.google.com/app/apikey).";
   }
   if (msg.includes("429") || msg.includes("RESOURCE_EXHAUSTED") || msg.includes("Quota exceeded") || msg.includes("rate limit")) {
-    return "Đã đạt giới hạn số lượt gọi Gemini API (Rate Limit / Quota miễn phí). Vui lòng đợi khoảng 1 phút rồi nhấn Thử lại.";
+    return "Đã đạt giới hạn số lượt gọi Gemini API (Rate Limit / Quota). Vui lòng đợi khoảng 1 phút rồi nhấn Thử lại.";
   }
   if (msg.includes("fetch failed") || msg.includes("ECONNREFUSED") || msg.includes("ETIMEDOUT") || msg.includes("network")) {
     return "Lỗi kết nối mạng giữa máy chủ và dịch vụ Google Gemini AI. Vui lòng kiểm tra kết nối mạng và thử lại sau ít giây.";
-  }
-  if (msg.includes("not found") || msg.includes("404")) {
-    return `Mô hình AI yêu cầu không khả dụng hoặc tên model chưa đúng. Chi tiết: ${msg}`;
   }
   return `Lỗi từ hệ thống AI: ${msg}`;
 }
@@ -110,6 +116,7 @@ CẤU TRÚC BÀI HỌC:
    - Tổng hợp 5 từ khó nhớ nhất, tóm tắt lời khuyên, đề viết tổng hợp dài hơn.
     `.trim();
 
+    const ai = getAiClient(req);
     const response = await ai.models.generateContent({
       model: "gemini-3.6-flash",
       contents: `Hãy tạo bài học chi tiết cho Tuần ${weekNumber}, ngày ${dayName} với chủ đề: "${dayTopic}". Trả về dữ liệu chuẩn JSON.`,
@@ -269,7 +276,7 @@ CẤU TRÚC BÀI HỌC:
     res.json(lessonData);
   } catch (error: any) {
     console.error("Error generating lesson:", error);
-    res.status(500).json({ error: formatGeminiError(error) });
+    res.status(500).json({ error: formatGeminiError(error, req) });
   }
 });
 
@@ -305,6 +312,7 @@ NHIỆM VỤ:
 5. Lời khuyên về phong thái giao tiếp tech (Tone of Voice).
     `.trim();
 
+    const ai = getAiClient(req);
     const response = await ai.models.generateContent({
       model: "gemini-3.6-flash",
       contents: prompt,
@@ -354,7 +362,7 @@ NHIỆM VỤ:
     res.json(result);
   } catch (error: any) {
     console.error("Error evaluating roleplay:", error);
-    res.status(500).json({ error: formatGeminiError(error) });
+    res.status(500).json({ error: formatGeminiError(error, req) });
   }
 });
 
@@ -396,6 +404,7 @@ NHIỆM VỤ CỦA BẠN (theo đúng quy tắc sư phạm):
 6. Đưa ra lời khích lệ ngắn gọn, truyền cảm hứng.
     `.trim();
 
+    const ai = getAiClient(req);
     const response = await ai.models.generateContent({
       model: "gemini-3.6-flash",
       contents: prompt,
@@ -443,7 +452,7 @@ NHIỆM VỤ CỦA BẠN (theo đúng quy tắc sư phạm):
     res.json(result);
   } catch (error: any) {
     console.error("Error evaluating short writing:", error);
-    res.status(500).json({ error: formatGeminiError(error) });
+    res.status(500).json({ error: formatGeminiError(error, req) });
   }
 });
 
@@ -482,6 +491,7 @@ ${
       parts: [{ text: message || "Hello" }],
     });
 
+    const ai = getAiClient(req);
     const response = await ai.models.generateContent({
       model: "gemini-3.6-flash",
       contents: formattedContents,
@@ -494,7 +504,7 @@ ${
     res.json({ reply: response.text || "Got it, let me check the logs." });
   } catch (error: any) {
     console.error("Error in roleplay chat:", error);
-    res.status(500).json({ error: formatGeminiError(error) });
+    res.status(500).json({ error: formatGeminiError(error, req) });
   }
 });
 
