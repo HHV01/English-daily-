@@ -19,9 +19,30 @@ const ai = new GoogleGenAI({
   },
 });
 
+// Helper to format Gemini API errors into actionable, easy-to-understand Vietnamese explanations
+function formatGeminiError(error: any): string {
+  if (!process.env.GEMINI_API_KEY || process.env.GEMINI_API_KEY.trim() === "") {
+    return "Chưa cấu hình GEMINI_API_KEY trên máy chủ (Render/file .env). Vui lòng thêm biến môi trường GEMINI_API_KEY để kích hoạt tính năng chấm bài AI.";
+  }
+  const msg = error?.message || String(error);
+  if (msg.includes("API_KEY_INVALID") || msg.includes("API key not valid") || msg.includes("forbidden") || msg.includes("403")) {
+    return "Mã GEMINI_API_KEY không hợp lệ hoặc đã bị vô hiệu hóa. Vui lòng kiểm tra lại API Key từ Google AI Studio (https://aistudio.google.com/app/apikey).";
+  }
+  if (msg.includes("429") || msg.includes("RESOURCE_EXHAUSTED") || msg.includes("Quota exceeded") || msg.includes("rate limit")) {
+    return "Đã đạt giới hạn số lượt gọi Gemini API (Rate Limit / Quota miễn phí). Vui lòng đợi khoảng 1 phút rồi nhấn Thử lại.";
+  }
+  if (msg.includes("fetch failed") || msg.includes("ECONNREFUSED") || msg.includes("ETIMEDOUT") || msg.includes("network")) {
+    return "Lỗi kết nối mạng giữa máy chủ và dịch vụ Google Gemini AI. Vui lòng kiểm tra kết nối mạng và thử lại sau ít giây.";
+  }
+  if (msg.includes("not found") || msg.includes("404")) {
+    return `Mô hình AI yêu cầu không khả dụng hoặc tên model chưa đúng. Chi tiết: ${msg}`;
+  }
+  return `Lỗi từ hệ thống AI: ${msg}`;
+}
+
 // API Routes
 app.get("/api/health", (req, res) => {
-  res.json({ status: "ok" });
+  res.json({ status: "ok", hasApiKey: Boolean(process.env.GEMINI_API_KEY) });
 });
 
 // Generate dynamic lesson according to prompt specifications
@@ -90,7 +111,7 @@ CẤU TRÚC BÀI HỌC:
     `.trim();
 
     const response = await ai.models.generateContent({
-      model: "gemini-3.8-flash",
+      model: "gemini-2.5-flash",
       contents: `Hãy tạo bài học chi tiết cho Tuần ${weekNumber}, ngày ${dayName} với chủ đề: "${dayTopic}". Trả về dữ liệu chuẩn JSON.`,
       config: {
         systemInstruction: systemPrompt,
@@ -248,7 +269,7 @@ CẤU TRÚC BÀI HỌC:
     res.json(lessonData);
   } catch (error: any) {
     console.error("Error generating lesson:", error);
-    res.status(500).json({ error: error.message || "Failed to generate lesson" });
+    res.status(500).json({ error: formatGeminiError(error) });
   }
 });
 
@@ -285,7 +306,7 @@ NHIỆM VỤ:
     `.trim();
 
     const response = await ai.models.generateContent({
-      model: "gemini-3.8-flash",
+      model: "gemini-2.5-flash",
       contents: prompt,
       config: {
         responseMimeType: "application/json",
@@ -333,7 +354,7 @@ NHIỆM VỤ:
     res.json(result);
   } catch (error: any) {
     console.error("Error evaluating roleplay:", error);
-    res.status(500).json({ error: error.message || "Failed to evaluate roleplay" });
+    res.status(500).json({ error: formatGeminiError(error) });
   }
 });
 
@@ -376,7 +397,7 @@ NHIỆM VỤ CỦA BẠN (theo đúng quy tắc sư phạm):
     `.trim();
 
     const response = await ai.models.generateContent({
-      model: "gemini-3.8-flash",
+      model: "gemini-2.5-flash",
       contents: prompt,
       config: {
         responseMimeType: "application/json",
@@ -422,7 +443,7 @@ NHIỆM VỤ CỦA BẠN (theo đúng quy tắc sư phạm):
     res.json(result);
   } catch (error: any) {
     console.error("Error evaluating short writing:", error);
-    res.status(500).json({ error: error.message || "Failed to evaluate short writing" });
+    res.status(500).json({ error: formatGeminiError(error) });
   }
 });
 
@@ -462,7 +483,7 @@ ${
     });
 
     const response = await ai.models.generateContent({
-      model: "gemini-3.8-flash",
+      model: "gemini-2.5-flash",
       contents: formattedContents,
       config: {
         systemInstruction,
@@ -473,7 +494,7 @@ ${
     res.json({ reply: response.text || "Got it, let me check the logs." });
   } catch (error: any) {
     console.error("Error in roleplay chat:", error);
-    res.status(500).json({ error: error.message || "Failed in roleplay chat" });
+    res.status(500).json({ error: formatGeminiError(error) });
   }
 });
 

@@ -136,14 +136,15 @@ export default function ExercisesSection({
       });
 
       if (!res.ok) {
-        throw new Error('Đánh giá chưa thành công, vui lòng thử lại');
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.error || errData.message || `Lỗi máy chủ (Mã lỗi HTTP ${res.status})`);
       }
 
       const data: RoleplayEvaluation = await res.json();
       setEvaluation(data);
     } catch (err: any) {
       console.error(err);
-      setEvalError(err.message || 'Lỗi khi kết nối với AI');
+      setEvalError(err.message || 'Lỗi khi kết nối với hệ thống chấm bài AI');
     } finally {
       setIsEvaluating(false);
     }
@@ -618,8 +619,32 @@ export default function ExercisesSection({
           )}
 
           {evalError && (
-            <div className="p-3 bg-rose-50 text-rose-800 rounded-xl text-xs border border-rose-200">
-              {evalError}
+            <div className="p-3.5 bg-rose-50 border border-rose-200 rounded-xl text-xs space-y-2 animate-in fade-in">
+              <div className="flex items-start gap-2">
+                <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                <div className="space-y-1 flex-1">
+                  <div className="font-bold text-rose-900">Chưa thể hoàn thành đánh giá câu trả lời:</div>
+                  <div className="text-rose-800 leading-relaxed">{evalError}</div>
+                </div>
+              </div>
+              <div className="flex items-center justify-end gap-2 pt-1 border-t border-rose-200/60">
+                <button
+                  type="button"
+                  onClick={() => setEvalError(null)}
+                  className="px-2.5 py-1 text-slate-500 hover:text-slate-800 text-[11px] font-medium"
+                >
+                  Đóng
+                </button>
+                <button
+                  type="button"
+                  onClick={handleEvaluateRoleplay}
+                  disabled={isEvaluating}
+                  className="px-3 py-1 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-[11px] font-semibold flex items-center gap-1 transition-all"
+                >
+                  <RefreshCw className={`w-3 h-3 ${isEvaluating ? 'animate-spin' : ''}`} />
+                  <span>Thử lại ngay</span>
+                </button>
+              </div>
             </div>
           )}
         </div>
