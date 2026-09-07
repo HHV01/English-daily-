@@ -1,0 +1,7 @@
+{
+  "name": "QC English Daily",
+  "description": "App luyện tiếng Anh giao tiếp hằng ngày chuyên biệt cho QC/Tester phần mềm theo lịch xoay vòng 6 tuần với AI phản hồi và hội thoại thực tế.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
