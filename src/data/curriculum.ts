@@ -91,5 +91,44 @@ export const WEEKS_SCHEDULE: WeekSchedule[] = [
       { dayCode: "T6", dayLabel: "Chuyên đề 5", topic: "Cross-browser & Mobile testing: trao đổi tương thích thiết bị" },
       { dayCode: "T7", dayLabel: "Tổng kết", topic: "Ôn tập chuyên đề nâng cao & Sẵn sàng phỏng vấn QC tiếng Anh", isReview: true },
     ]
+  },
+  {
+    weekNumber: 8,
+    themeTitle: "GIAO TIẾP HÀNG NGÀY & SMALL TALK",
+    themeDescription: "Chào hỏi, hỏi thăm, trò chuyện giờ ăn trưa, cà phê và kết nối tự nhiên giữa người với người",
+    days: [
+      { dayCode: "T2", dayLabel: "Thứ Hai", topic: "Chào hỏi đầu tuần & Phá băng ('How was your weekend?', 'How's it going?')" },
+      { dayCode: "T3", dayLabel: "Thứ Ba", topic: "Coffee chat & Rủ ăn trưa ('Wanna grab lunch?', 'Let's get some coffee')" },
+      { dayCode: "T4", dayLabel: "Thứ Tư", topic: "Hỏi thăm sở thích, phim ảnh, âm nhạc & thói quen hàng ngày" },
+      { dayCode: "T5", dayLabel: "Thứ Năm", topic: "Khen ngợi, động viên & chúc mừng bạn bè/đồng nghiệp ('Good job!', 'Cheer up!')" },
+      { dayCode: "T6", dayLabel: "Thứ Sáu", topic: "Kế hoạch cuối tuần & Tạm biệt ('Any plans for the weekend?', 'Have a great weekend!')" },
+      { dayCode: "T7", dayLabel: "Thứ Bảy / CN", topic: "Ôn tập tuần 8: Tổng hợp mẫu câu Small Talk & Giao lưu tự nhiên", isReview: true },
+    ]
+  },
+  {
+    weekNumber: 9,
+    themeTitle: "NGHỆ THUẬT KỂ CHUYỆN (STORYTELLING)",
+    themeDescription: "Kể lại một sự việc, chia sẻ trải nghiệm cá nhân, bày tỏ cảm xúc và chia sẻ tin tức",
+    days: [
+      { dayCode: "T2", dayLabel: "Thứ Hai", topic: "Mở đầu câu chuyện thu hút ('Guess what happened?', 'You won't believe this...')" },
+      { dayCode: "T3", dayLabel: "Thứ Ba", topic: "Kể lại một sự cố hài hước hoặc rắc rối nhỏ (kẹt xe, quên đồ, thời tiết bất ngờ)" },
+      { dayCode: "T4", dayLabel: "Thứ Tư", topic: "Kể về một chuyến du lịch, một món ăn ngon hoặc địa điểm thú vị" },
+      { dayCode: "T5", dayLabel: "Thứ Năm", topic: "Thể hiện sự lắng nghe & Phản hồi cảm xúc ('No way!', 'Really?', 'That sounds awesome!')" },
+      { dayCode: "T6", dayLabel: "Thứ Sáu", topic: "Đúc kết & Chuyển chủ đề trong cuộc trò chuyện ('Long story short...', 'Anyway...')" },
+      { dayCode: "T7", dayLabel: "Thứ Bảy / CN", topic: "Ôn tập tuần 9: Luyện phản xạ kể chuyện mạch lạc & cuốn hút", isReview: true },
+    ]
+  },
+  {
+    weekNumber: 10,
+    themeTitle: "ĐỜI SỐNG XÃ HỘI & GIAO LƯU QUỐC TẾ",
+    themeDescription: "Tụ tập sau giờ làm, kết bạn mới, văn hóa ứng xử và giao tiếp khi ra nước ngoài",
+    days: [
+      { dayCode: "T2", dayLabel: "Thứ Hai", topic: "Làm quen với người mới & Giới thiệu bản thân trong sự kiện/gặp mặt" },
+      { dayCode: "T3", dayLabel: "Thứ Ba", topic: "Rủ rê tụ tập sau giờ làm (Happy hour, đi ăn tối, đi dạo)" },
+      { dayCode: "T4", dayLabel: "Thứ Tư", topic: "Từ chối lời mời khéo léo, không gây ngại ngùng ('I wish I could, but...')" },
+      { dayCode: "T5", dayLabel: "Thứ Năm", topic: "Trao đổi về khác biệt văn hóa, phong tục & lối sống" },
+      { dayCode: "T6", dayLabel: "Thứ Sáu", topic: "Giao tiếp đời thường khi đi du lịch (hỏi đường, gọi món, nhờ vả lịch sự)" },
+      { dayCode: "T7", dayLabel: "Thứ Bảy / CN", topic: "Ôn tập tuần 10: Tự tin giao tiếp đời sống như người bản xứ", isReview: true },
+    ]
   }
 ];

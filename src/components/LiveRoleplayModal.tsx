@@ -17,6 +17,8 @@ interface ChatMessage {
 }
 
 const PARTNER_OPTIONS = [
+  { id: "Friendly Colleague (Small Talk & Coffee)", name: "Alex (Đồng nghiệp thân thiện - Cà phê & Tán gẫu)", role: "Friendly Colleague", avatar: "bg-emerald-600" },
+  { id: "International Teammate (Storytelling & Life)", name: "Jessica (Đồng nghiệp quốc tế - Kể chuyện & Đời sống)", role: "International Teammate", avatar: "bg-pink-600" },
   { id: "Senior Backend Developer", name: "David (Senior Backend Dev)", role: "Backend Developer", avatar: "bg-blue-600" },
   { id: "Frontend Developer", name: "Tom (Frontend Dev)", role: "Frontend Developer", avatar: "bg-indigo-600" },
   { id: "Product Manager", name: "Sarah (Product Manager)", role: "Product Manager", avatar: "bg-purple-600" },

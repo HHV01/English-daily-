@@ -867,5 +867,339 @@ export const STARTER_LESSONS: Record<string, LessonData> = {
       adviceVi: "Đừng đọc lại toàn bộ tên ticket Jira từng con số một. Đồng đội muốn nghe 'Giá trị công việc' (Value delivered): bạn đã test xong phần nào, rủi ro lớn nhất hôm nay là gì, và có ai đang chặn đường bạn không.",
       keyTakeawayEn: "Focus on progress, risk, and impediments, not just ticket numbers."
     }
+  },
+  "w8_T2": {
+    weekNumber: 8,
+    dayCode: "T2",
+    dayName: "Thứ Hai",
+    themeTitle: "TUẦN 8: GIAO TIẾP HÀNG NGÀY & SMALL TALK",
+    lessonTitle: "Chào hỏi đầu tuần & Phá băng ('How was your weekend?', 'How's it going?')",
+    vocabulary: [
+      {
+        word: "catch up",
+        ipa: "/kætʃ ʌp/",
+        partOfSpeech: "phrasal verb",
+        meaningVi: "Hàn huyên, cập nhật tình hình dạo này với nhau",
+        exampleEn: "Let's grab a coffee during break to catch up!",
+        exampleVi: "Lúc nghỉ giải lao đi làm cốc cà phê rồi hàn huyên nhé!",
+        tip: "Dùng rất tự nhiên khi gặp lại đồng nghiệp sau kỳ nghỉ hoặc lâu ngày không nói chuyện."
+      },
+      {
+        word: "low-key",
+        ipa: "/ˌləʊˈkiː/",
+        partOfSpeech: "adjective",
+        meaningVi: "Bình yên, nhẹ nhàng, không ồn ào",
+        exampleEn: "My weekend was pretty low-key. I just stayed home and watched movies.",
+        exampleVi: "Cuối tuần của tôi khá nhẹ nhàng bình yên. Tôi chỉ ở nhà xem phim thôi.",
+        tip: "Cụm từ người bản xứ dùng cực kỳ nhiều khi được hỏi 'How was your weekend?'."
+      },
+      {
+        word: "hit the spot",
+        ipa: "/hɪt ðə spɒt/",
+        partOfSpeech: "idiom",
+        meaningVi: "Rất đúng ý / ngon tuyệt (thức ăn, đồ uống)",
+        exampleEn: "This iced coffee really hits the spot on a hot Monday morning.",
+        exampleVi: "Cốc cà phê đá này thực sự quá đã vào buổi sáng thứ Hai nóng bức.",
+        tip: "Dùng để khen đồ ăn, thức uống hoặc một khoảng nghỉ giải lao đúng lúc."
+      },
+      {
+        word: "how's everything going?",
+        ipa: "/haʊz ˈev.ri.θɪŋ ˈɡəʊ.ɪŋ/",
+        partOfSpeech: "phrase",
+        meaningVi: "Dạo này mọi thứ thế nào rồi?",
+        exampleEn: "Hey Tom! How's everything going with you this week?",
+        exampleVi: "Chào Tom! Tuần này mọi việc bên bạn thế nào rồi?",
+        tip: "Mẫu câu chào hỏi thân thiện, mở hơn nhiều so với 'How are you?' đơn thuần."
+      },
+      {
+        word: "get back into the swing of things",
+        ipa: "/ɡet bæk ˈɪn.tuː ðə swɪŋ əv θɪŋz/",
+        partOfSpeech: "idiom",
+        meaningVi: "Bắt nhịp lại với guồng quay công việc",
+        exampleEn: "It always takes me a little while to get back into the swing of things on Monday morning.",
+        exampleVi: "Sáng thứ Hai nào tôi cũng mất một chút thời gian để bắt nhịp lại với guồng công việc.",
+        tip: "Cách nói cực kỳ dí dỏm và đồng cảm khi trò chuyện đầu tuần."
+      },
+      {
+        word: "hang in there",
+        ipa: "/hæŋ ɪn ðeər/",
+        partOfSpeech: "phrase",
+        meaningVi: "Cố gắng lên nhé! Ráng lên!",
+        exampleEn: "It looks like a busy sprint ahead, but hang in there!",
+        exampleVi: "Sprint này có vẻ bận rộn đấy, nhưng ráng lên nhé!",
+        tip: "Câu động viên chân thành giữa đồng nghiệp và bạn bè."
+      }
+    ],
+    patterns: [
+      {
+        context: "Hỏi thăm kỳ nghỉ cuối tuần của đồng nghiệp / bạn bè",
+        formalEn: "Good morning. I hope you had a pleasant and restful weekend.",
+        casualEn: "Morning! How was your weekend? Do anything fun or just relax?",
+        vietnameseMeaning: "Chào buổi sáng! Cuối tuần của bạn thế nào? Có đi đâu chơi hay chỉ nghỉ ngơi ở nhà?",
+        breakdownVi: "Trong văn phòng hiện đại, bản Casual thân thiện và tạo cảm giác gần gũi hơn rất nhiều."
+      },
+      {
+        context: "Trả lời khi người khác hỏi thăm cuối tuần của mình",
+        formalEn: "It was great, thank you. I spent some quality time with my family.",
+        casualEn: "It was really nice! Pretty chill, mostly slept in and went to a cafe. How about yours?",
+        vietnameseMeaning: "Cuối tuần thích lắm! Khá thong thả, chủ yếu là ngủ nướng và đi cà phê. Còn bạn thì sao?",
+        breakdownVi: "Luôn kèm câu hỏi ngược lại 'How about yours?' hoặc 'How was yours?' để duy trì cuộc hội thoại."
+      },
+      {
+        context: "Mở lời rủ đi uống cà phê hoặc ăn trưa",
+        formalEn: "Would you be interested in joining us for lunch today?",
+        casualEn: "Hey, a few of us are grabbing coffee downstairs. Wanna come along?",
+        vietnameseMeaning: "Ê, mấy anh em đang xuống lầu mua cà phê này. Có muốn đi cùng không?",
+        breakdownVi: "'Wanna come along?' hoặc 'Wanna join?' là cách rủ rê cực kỳ tự nhiên trong công ty."
+      }
+    ],
+    dialogue: {
+      titleVi: "Trò chuyện đầu tuần tại góc pha cà phê (Coffee Corner)",
+      descriptionVi: "Cuộc trò chuyện giữa bạn (QC) và Alex (đồng nghiệp) vào sáng thứ Hai.",
+      lines: [
+        {
+          speaker: "Alex (Colleague)",
+          roleTag: "Colleague",
+          textEn: "Morning! You look ready for the week. How was your weekend?",
+          textVi: "Chào buổi sáng! Trông bạn có vẻ sẵn sàng cho tuần mới rồi đấy. Cuối tuần vừa rồi thế nào?"
+        },
+        {
+          speaker: "You (QC)",
+          roleTag: "You",
+          textEn: "Morning Alex! It was pretty chill, actually. I caught up on some sleep and tried a new coffee shop nearby. How about yours?",
+          textVi: "Chào Alex! Cũng khá thư thả. Mình tranh thủ ngủ bù và đi thử một quán cà phê mới gần nhà. Còn bạn thì sao?"
+        },
+        {
+          speaker: "Alex (Colleague)",
+          roleTag: "Colleague",
+          textEn: "Oh, mine was super hectic! My family and I drove out to the countryside. Fun, but exhausting!",
+          textVi: "Ôi, của mình thì bận rộn dã man! Cả nhà mình lái xe về quê chơi. Vui thật nhưng mà mệt nhoài!"
+        },
+        {
+          speaker: "You (QC)",
+          roleTag: "You",
+          textEn: "Haha, I know that feeling. A trip with family is always memorable though! Are you guys grabbing lunch together today?",
+          textVi: "Haha, mình hiểu cảm giác đó. Nhưng đi chơi với gia đình lúc nào cũng đáng nhớ! Trưa nay mọi người có đi ăn cùng nhau không?"
+        },
+        {
+          speaker: "Alex (Colleague)",
+          roleTag: "Colleague",
+          textEn: "Definitely! We're thinking of that noodle place across the street at 12:00. Wanna join us?",
+          textVi: "Chắc chắn rồi! Bọn mình định tầm 12h qua quán bún đối diện đường. Đi cùng luôn nhé?"
+        },
+        {
+          speaker: "You (QC)",
+          roleTag: "You",
+          textEn: "Sounds awesome, count me in! See you at 12 then.",
+          textVi: "Tuyệt quá, tính mình một suất nhé! Hẹn gặp bạn lúc 12h."
+        }
+      ]
+    },
+    exercises: [
+      {
+        id: "ex_w8_1",
+        type: "multiple_choice",
+        promptVi: "Đồng nghiệp hỏi: 'How was your weekend?' Bạn muốn nói cuối tuần của mình rất bình yên, nhẹ nhàng và ở nhà nghỉ ngơi. Câu nào tự nhiên nhất?",
+        options: [
+          "It was very quiet because I was lonely.",
+          "It was pretty low-key, just stayed home and recharged.",
+          "My weekend is not very active.",
+          "I have no weekend."
+        ],
+        correctAnswer: "It was pretty low-key, just stayed home and recharged.",
+        explanationVi: "'Pretty low-key' là cách nói tự nhiên của người bản xứ để chỉ một kỳ nghỉ nhẹ nhàng, không tiệc tùng ồn ào; 'recharged' nghĩa là nạp lại năng lượng."
+      },
+      {
+        id: "ex_w8_2",
+        type: "word_order",
+        promptVi: "Sắp xếp các từ sau thành câu rủ đồng nghiệp đi ăn trưa tự nhiên:",
+        scrambledWords: ["lunch", "Wanna", "together", "grab", "today?"],
+        correctSentence: "Wanna grab lunch together today?",
+        explanationVi: "'Wanna grab lunch...?' là cụm từ rủ ăn trưa phổ biến và thân mật nhất ở môi trường công sở quốc tế."
+      },
+      {
+        id: "ex_w8_3",
+        type: "error_correction",
+        promptVi: "Tìm và sửa lỗi sai trong câu: 'I am agree with your suggestion, count in me!'",
+        incorrectSentence: "I am agree with your suggestion, count in me!",
+        correctedSentence: "I agree with your suggestion, count me in!",
+        explanationVi: "Trong tiếng Anh: 'agree' là động từ (dùng 'I agree', không dùng 'I am agree'). Cụm từ rủ thêm mình vào nhóm là 'count me in' (không phải 'count in me')."
+      }
+    ],
+    roleplayPrompt: {
+      partnerName: "Alex (Friendly Colleague)",
+      partnerRole: "Colleague",
+      situationVi: "Đồng nghiệp Alex vừa đi ngang qua bàn bạn và rủ bạn đi uống cà phê giải lao 10 phút.",
+      starterLineEn: "Hey! You've been staring at that screen for hours. Wanna take a 5-minute coffee break downstairs with me?",
+      starterLineVi: "Ê! Bạn ngồi dán mắt vào màn hình mấy tiếng rồi đấy. Xuống lầu làm ly cà phê giải lao 5 phút với mình không?",
+      sampleAnswerFormal: "Thank you for the invitation. I would appreciate a quick break to refresh.",
+      sampleAnswerCasual: "That would be awesome! My eyes really need a break. Let's go!"
+    },
+    shortWritingTask: {
+      titleVi: "Viết tin nhắn Small Talk rủ bạn bè/đồng nghiệp đi ăn trưa",
+      promptVi: "Viết 1 tin nhắn ngắn (3-4 câu) gửi vào nhóm chat rủ mọi người đi ăn trưa: gợi ý một quán ăn ngon hoặc hỏi xem trưa nay mọi người muốn ăn gì.",
+      contextScenarioVi: "Bây giờ là 11:45 AM, bạn muốn rủ các bạn cùng team hoặc đồng nghiệp thân thiết đi ăn trưa cùng.",
+      targetLength: "3-5 câu (~40-70 từ)",
+      recommendedKeywords: ["grab lunch", "craving for", "across the street", "wanna join", "count me in"],
+      sentenceStarterEn: "Hey everyone! It's almost lunch time.",
+      guidelinesVi: [
+        "Dùng giọng văn thân thiện, vui vẻ (casual tone)",
+        "Gợi ý thời gian và địa điểm cụ thể",
+        "Có câu hỏi chốt để mọi người trả lời ('Who's in?', 'Let me know!')"
+      ]
+    },
+    dailyTip: {
+      titleVi: "Nghệ thuật Small Talk: Công thức 'Answer + Add Info + Ask Back'",
+      adviceVi: "Khi ai đó hỏi thăm bạn một câu xã giao (như 'How are you?' hoặc 'How was your weekend?'), đừng chỉ trả lời 'Good' rồi im lặng. Hãy áp dụng công thức 3 bước: 1. Trả lời ngắn ('Pretty good!') $\rightarrow$ 2. Thêm 1 chi tiết nhỏ ('Tried a new coffee place') $\rightarrow$ 3. Hỏi ngược lại ('How about you?'). Đây là bí quyết giúp bạn luôn giao tiếp duyên dáng và kết nối mọi người dễ dàng!",
+      keyTakeawayEn: "Keep conversations alive with: Answer + Add a detail + Ask back."
+    }
+  },
+  "w9_T2": {
+    weekNumber: 9,
+    dayCode: "T2",
+    dayName: "Thứ Hai",
+    themeTitle: "TUẦN 9: NGHỆ THUẬT KỂ CHUYỆN (STORYTELLING)",
+    lessonTitle: "Mở đầu câu chuyện thu hút ('Guess what happened?', 'You won't believe this...')",
+    vocabulary: [
+      {
+        word: "out of the blue",
+        ipa: "/aʊt əv ðə bluː/",
+        partOfSpeech: "idiom",
+        meaningVi: "Bất ngờ, từ trên trời rơi xuống, không báo trước",
+        exampleEn: "Out of the blue, my old college friend called me yesterday!",
+        exampleVi: "Tự nhiên bất thình lình, hôm qua đứa bạn đại học cũ gọi cho tôi!",
+        tip: "Dùng để tạo sự kịch tính và bất ngờ khi mở đầu một câu chuyện."
+      },
+      {
+        word: "you won't believe this",
+        ipa: "/juː wəʊnt bɪˈliːv ðɪs/",
+        partOfSpeech: "phrase",
+        meaningVi: "Bạn sẽ không tin nổi chuyện này đâu",
+        exampleEn: "You won't believe what happened on my way to work today.",
+        exampleVi: "Bạn sẽ không tin nổi chuyện gì đã xảy ra trên đường tôi đi làm hôm nay đâu.",
+        tip: "Mẫu câu 'câu view' cực kỳ hiệu quả khi muốn mọi người chú ý lắng nghe."
+      },
+      {
+        word: "long story short",
+        ipa: "/lɒŋ ˈstɔː.ri ʃɔːt/",
+        partOfSpeech: "idiom",
+        meaningVi: "Tóm lại là / Nói ngắn gọn là",
+        exampleEn: "Long story short, we ended up finding the cutest cafe in the alley.",
+        exampleVi: "Tóm lại là cuối cùng bọn mình lại tìm ra một quán cà phê siêu xinh trong ngõ.",
+        tip: "Dùng khi bạn muốn bỏ qua các chi tiết rườm rà và đi thẳng vào kết quả của câu chuyện."
+      },
+      {
+        word: "turn out",
+        ipa: "/tɜːn aʊt/",
+        partOfSpeech: "phrasal verb",
+        meaningVi: "Hóa ra là / Kết cục là",
+        exampleEn: "It turned out that the person sitting next to me was also a software tester!",
+        exampleVi: "Hóa ra là người ngồi cạnh tôi cũng là một tester phần mềm!",
+        tip: "Dùng để diễn tả một sự thật bất ngờ được hé lộ."
+      },
+      {
+        word: "no way!",
+        ipa: "/nəʊ weɪ/",
+        partOfSpeech: "exclamation",
+        meaningVi: "Thật á?! Không thể nào!",
+        exampleEn: "No way! Did they really give you a free upgrade?",
+        exampleVi: "Thật á?! Họ nâng hạng phòng miễn phí cho bạn luôn á?",
+        tip: "Câu phản hồi thể hiện sự ngạc nhiên và hứng thú khi nghe người khác kể chuyện."
+      }
+    ],
+    patterns: [
+      {
+        context: "Mở đầu một câu chuyện vui hoặc bất ngờ",
+        formalEn: "I would like to share an interesting experience that occurred recently.",
+        casualEn: "Guess what happened yesterday? You're not gonna believe this!",
+        vietnameseMeaning: "Đoán xem hôm qua có chuyện gì? Bạn sẽ không tin nổi đâu!",
+        breakdownVi: "Dùng khi bắt đầu kể một câu chuyện cá nhân vui vẻ trong giờ giải lao."
+      },
+      {
+        context: "Lắng nghe và khuyến khích người khác kể tiếp",
+        formalEn: "Please proceed, I am very interested to hear the rest.",
+        casualEn: "Really? What happened next? Don't leave me hanging!",
+        vietnameseMeaning: "Thật á? Rồi sao nữa? Kể tiếp đi đừng làm người ta tò mò chứ!",
+        breakdownVi: "'Don't leave me hanging!' nghĩa là 'đừng bỏ lửng câu chuyện làm tôi tò mò'."
+      }
+    ],
+    dialogue: {
+      titleVi: "Kể chuyện một sự cố thú vị trên đường đi làm",
+      descriptionVi: "Bạn đang chia sẻ một câu chuyện nhỏ hài hước với đồng nghiệp.",
+      lines: [
+        {
+          speaker: "You",
+          roleTag: "You",
+          textEn: "Hey guys, you won't believe what happened on my way here this morning!",
+          textVi: "Mọi người ơi, không thể tin nổi sáng nay trên đường đến đây mình gặp chuyện gì đâu!"
+        },
+        {
+          speaker: "Jessica (Colleague)",
+          roleTag: "Colleague",
+          textEn: "Haha, what happened? Traffic again?",
+          textVi: "Haha chuyện gì thế? Lại bị kẹt xe à?"
+        },
+        {
+          speaker: "You",
+          roleTag: "You",
+          textEn: "Worse! I thought I left my wallet at home, but when I reached the bakery, a cute golden retriever was holding my lost keychain in its mouth!",
+          textVi: "Còn hơn thế! Mình tưởng làm rơi ví ở nhà, nhưng lúc đến tiệm bánh thì có một chú chó Golden dễ thương đang ngậm chùm chìa khóa bị rơi của mình trong miệng!"
+        },
+        {
+          speaker: "Jessica (Colleague)",
+          roleTag: "Colleague",
+          textEn: "No way! That is so adorable! Did you take a picture?",
+          textVi: "Thật á?! Đáng yêu quá vậy! Bạn có chụp ảnh lại không?"
+        },
+        {
+          speaker: "You",
+          roleTag: "You",
+          textEn: "I did! Here, look at this. The owner was super nice too. Totally made my day!",
+          textVi: "Có chứ! Đây, xem này. Chủ chú chó cũng siêu dễ thương. Đúng là làm cả ngày của mình vui lên hẳn!"
+        }
+      ]
+    },
+    exercises: [
+      {
+        id: "ex_w9_1",
+        type: "multiple_choice",
+        promptVi: "Khi bạn muốn kết thúc một câu chuyện dài và đi vào điểm mấu chốt, cụm từ nào tự nhiên nhất?",
+        options: [
+          "To tell you the end",
+          "Long story short",
+          "Short narrative",
+          "Cut the talking"
+        ],
+        correctAnswer: "Long story short",
+        explanationVi: "'Long story short' là thành ngữ kinh điển của người bản xứ có nghĩa 'nói ngắn gọn là / tóm lại là'."
+      }
+    ],
+    roleplayPrompt: {
+      partnerName: "Jessica (Friendly Colleague)",
+      partnerRole: "Colleague",
+      situationVi: "Jessica đang tò mò về chuyến đi nghỉ mát cuối tuần vừa rồi của bạn.",
+      starterLineEn: "I heard you went camping by the lake last weekend! How was the trip?",
+      starterLineVi: "Nghe nói cuối tuần rồi bạn đi cắm trại bên hồ à! Chuyến đi thế nào thế?",
+      sampleAnswerFormal: "The trip was very scenic and refreshing. We enjoyed the natural surroundings.",
+      sampleAnswerCasual: "Oh, it was fantastic! The weather was perfect and we made a campfire under the stars. You should definitely check it out sometime!"
+    },
+    shortWritingTask: {
+      titleVi: "Kể lại một trải nghiệm vui hoặc đáng nhớ trong 3-5 câu",
+      promptVi: "Viết một đoạn văn ngắn (3-5 câu) kể lại một kỷ niệm vui, một sự cố hài hước hoặc một điều bất ngờ vừa xảy ra gần đây với bạn.",
+      contextScenarioVi: "Bạn chia sẻ một mẩu chuyện nhỏ trên group chat của team hoặc trò chuyện với bạn bè.",
+      targetLength: "3-5 câu (~50-80 từ)",
+      recommendedKeywords: ["Out of the blue", "You won't believe", "Turned out", "Made my day", "Hilarious"],
+      sentenceStarterEn: "You won't believe what happened recently...",
+      guidelinesVi: [
+        "Có câu mở đầu gợi tò mò (Hook)",
+        "Sử dụng từ nối diễn tả trình tự thời gian (Suddenly, Then, Finally, Long story short)",
+        "Kết lại bằng cảm xúc của bạn (It made my day, We couldn't stop laughing)"
+      ]
+    },
+    dailyTip: {
+      titleVi: "Bí quyết kể chuyện cuốn hút: Dùng cảm thán từ (Reaction Words)",
+      adviceVi: "Để người nghe hào hứng, hãy dùng các từ thể hiện cảm xúc sống động như: 'Suddenly', 'Out of nowhere', 'To my surprise'. Và khi là người nghe, hãy luôn đệm các từ như 'Really?', 'No way!', 'That's insane!', 'I love that!'. Đó chính là chìa khóa kết nối con người với con người!",
+      keyTakeawayEn: "Active listening and vibrant reactions turn simple chats into meaningful connections."
+    }
   }
 };

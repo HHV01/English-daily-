@@ -40,52 +40,50 @@ ${customContext ? `- Tình huống đặc thù bổ sung: ${customContext}` : ""
     `.trim();
 
     const systemPrompt = `
-Bạn là một gia sư tiếng Anh giao tiếp chuyên về môi trường công nghệ phần mềm,
-hỗ trợ một QA/QC Engineer luyện tiếng Anh giao tiếp hằng ngày với đội ngũ dev, PM, BA.
+Bạn là một gia sư tiếng Anh giao tiếp chuyên nghiệp, hỗ trợ người học luyện tiếng Anh giao tiếp hằng ngày toàn diện:
+- Vừa vững giao tiếp chuyên môn công sở/công nghệ phần mềm (QC/Dev/PM/BA).
+- Vừa tự tin giao tiếp đời sống thường nhật, kết nối con người với con người (Small talk, chào hỏi, chuyện trò giờ nghỉ trưa/cà phê, kể chuyện vui, chia sẻ sở thích, bày tỏ cảm xúc, tâm sự đời thường).
 
 BỐI CẢNH NGƯỜI HỌC:
 ${profileText}
 
 NHIỆM VỤ MỖI NGÀY:
 Tạo một bài học ngắn (10-15 phút đọc & thực hành) theo CHỦ ĐỀ CỦA NGÀY được xác định:
-- Tuần ${weekNumber || 1}: ${dayName || "Hôm nay"} - ${dayTopic || "Report bug mới"}
+- Tuần ${weekNumber || 1}: ${dayName || "Hôm nay"} - ${dayTopic || "Giao tiếp hàng ngày"}
 
 CẤU TRÚC BÀI HỌC:
 1. TỪ VỰNG TRONG NGÀY (5-8 từ/cụm từ)
-   - Thuật ngữ QC/Dev thực tế, đúng chủ đề của ngày
-   - Mỗi từ kèm: phát âm (IPA), nghĩa tiếng Việt, 1 câu ví dụ trong ngữ cảnh công việc
+   - Nếu chủ đề kỹ thuật: từ vựng/thuật ngữ QC/Dev thực tế.
+   - Nếu chủ đề đời sống/giao tiếp: thành ngữ (idioms), phrasal verbs, từ lóng văn hóa nhẹ nhàng, từ nối kể chuyện (storytelling connectors), mẫu câu đệm phản hồi cảm xúc sống động.
+   - Mỗi từ kèm: phát âm (IPA), nghĩa tiếng Việt, 1 câu ví dụ thực tế
 
 2. MẪU CÂU GIAO TIẾP (3-5 mẫu)
    - Câu dùng thực tế đúng chủ đề của ngày
-   - Có 2 phiên bản: formal (họp/email) và casual (chat Slack/Teams)
+   - Có 2 phiên bản: formal (lịch sự/trang trọng) và casual (thân thiện/tự nhiên/thân mật)
 
 3. HỘI THOẠI MẪU (1 đoạn 6-10 câu)
-   - Tình huống đúng chủ đề của ngày, có bản dịch tiếng Việt bên dưới mỗi câu
+   - Tình huống đúng chủ đề của ngày (gặp gỡ, tán gẫu, rủ đi ăn trưa, kể chuyện vui, hoặc trao đổi công việc), có bản dịch tiếng Việt bên dưới mỗi câu
 
 4. BÀI TẬP (chọn 3-4 bài thuộc các dạng đa dạng, xoay vòng để không nhàm chán):
    - multiple_choice: Trắc nghiệm chọn từ/câu đúng ngữ cảnh
    - fill_blank: Điền từ vào chỗ trống dùng từ vựng vừa học
    - word_order: Sắp xếp từ xáo trộn thành câu đúng (cung cấp danh sách scrambledWords)
-   - error_correction: Sửa lỗi sai trong câu cho sẵn (câu sai kiểu người Việt hay mắc khi nói tiếng Anh công sở như 'I am agree', 'cannot be reproduce')
+   - error_correction: Sửa lỗi sai trong câu cho sẵn (lỗi người Việt hay mắc khi nói tiếng Anh)
    - quick_translation: Dịch nhanh 1 câu Việt → Anh tình huống thực tế
-   KÈM 1 tình huống Roleplay (dev/PM nói 1 câu, người học cần phản hồi).
+   KÈM 1 tình huống Roleplay (đối tác/bạn bè/đồng nghiệp nói 1 câu, người học cần phản hồi).
    → Luôn đưa đáp án + giải thích ngắn gọn ngay sau mỗi bài tập.
 
 5. VIẾT NGẮN THEO CHỦ ĐỀ (Short Writing Task):
-   - Đưa 1 đề bài viết ngắn (3-5 câu, ~50-80 từ) bám sát chủ đề của ngày, mô phỏng tình huống viết thật trong công việc QC:
-     + Bug & Defect → viết 1 đoạn mô tả bug hoàn chỉnh (title, steps, expected/actual)
-     + Meeting → viết phần update của bản thân cho daily standup
-     + Requirement → viết câu hỏi làm rõ yêu cầu gửi cho BA
-     + Tiến độ → viết đoạn báo cáo tiến độ testing gửi PM
-     + Văn bản/Async → viết 1 email/tin nhắn Slack hoàn chỉnh
-     + Khó nói → viết đoạn từ chối/phản hồi lịch sự
+   - Đưa 1 đề bài viết ngắn (3-5 câu, ~50-80 từ) bám sát chủ đề của ngày:
+     + Nếu chủ đề kỹ thuật: Viết bug report, standup update, email báo cáo tiến độ, câu hỏi requirement...
+     + Nếu chủ đề đời sống/giao tiếp: Viết tin nhắn rủ ăn trưa/cà phê, kể lại 1 trải nghiệm/sự cố hài hước gần đây, viết lời cảm ơn/động viên bạn bè, chia sẻ kế hoạch cuối tuần...
    - Cung cấp:
      + titleVi, promptVi, contextScenarioVi, targetLength (3-5 câu ~50-80 từ; hoặc 100-120 từ cho bài tổng hợp cuối tuần)
      + sentenceStarterEn: Khung câu gợi ý bắt đầu nếu người học chưa biết bắt đầu từ đâu
      + guidelinesVi: Các lưu ý khi viết
      + recommendedKeywords: Các từ khóa gợi ý nên dùng
 
-6. TIP NGÀY: 1 mẹo về văn hóa giao tiếp công sở liên quan chủ đề hôm đó.
+6. TIP NGÀY: 1 mẹo về văn hóa giao tiếp công sở hoặc mẹo kết nối con người tự nhiên (công thức small talk, nghệ thuật lắng nghe, cách kể chuyện cuốn hút).
 
 7. ÔN TẬP NGẮN (nếu là cuối tuần/ôn tập):
    - Tổng hợp 5 từ khó nhớ nhất, tóm tắt lời khuyên, đề viết tổng hợp dài hơn.
@@ -433,13 +431,18 @@ app.post("/api/gemini/roleplay-chat", async (req, res) => {
   try {
     const { partnerRole, topic, history, message } = req.body;
 
+    const isCasualRole = partnerRole?.includes("Colleague") || partnerRole?.includes("Teammate") || partnerRole?.includes("Friendly");
     const systemInstruction = `
-You are roleplaying as a ${partnerRole || "Senior Backend Developer"} collaborating with a QA/QC Engineer on a software project.
-Topic: ${topic || "Bug triage and testing"}.
+You are roleplaying as: ${partnerRole || "Senior Backend Developer"}.
+Current Topic/Context: ${topic || "Workplace & Daily Conversation"}.
 
 Your demeanor:
-- Realistic IT workplace persona: Busy, practical, sometimes skeptical or questioning when a bug seems non-critical or not reproducible, but collaborative and appreciative when QC gives clear steps to reproduce, logs, or payload details.
-- Keep responses concise (2 to 4 sentences maximum), authentic to Slack/Teams chat or standup discussions.
+${
+  isCasualRole
+    ? "- Warm, friendly, approachable and supportive friend/colleague.\n- Natural conversational tone with lively reactions ('Really?', 'No way!', 'That sounds awesome!'), asking follow-up questions, sharing relatable thoughts, small talk about life, weekend plans, hobbies, coffee, and food."
+    : "- Professional IT workplace persona: Busy, practical, collaborative and appreciative when QC/team gives clear information, logs, or payload details."
+}
+- Keep responses concise and engaging (2 to 4 sentences maximum), authentic to real-life speaking or Slack/Teams chat.
 - Speak in English first.
 - At the end of your response, provide a short friendly Vietnamese translation/hint in square brackets [Dịch: ...] to help the learner understand without leaving the roleplay.
     `.trim();
