@@ -34,9 +34,9 @@ export default function DialogueSection({ dialogue }: Props) {
     for (let i = 0; i < dialogue.length; i++) {
       if (isCancelledRef.current) break;
       setPlayingIndex(i);
-      await playAudio(dialogue[i].en, 0.95);
+      await playAudio(dialogue[i].en);
       // Brief pause between lines
-      await new Promise((r) => setTimeout(r, 600));
+      await new Promise((r) => setTimeout(r, 700));
     }
 
     setIsAutoPlaying(false);

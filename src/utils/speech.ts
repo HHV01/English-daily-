@@ -1,6 +1,26 @@
 // Web Speech API helper for pronunciation and listening practice
 
-export function playAudio(text: string, rate: number = 0.95): Promise<void> {
+const AUDIO_SPEED_KEY = "qc_english_audio_speed";
+
+export function getAudioSpeed(): number {
+  if (typeof window === "undefined") return 0.78;
+  const saved = localStorage.getItem(AUDIO_SPEED_KEY);
+  if (saved) {
+    const parsed = parseFloat(saved);
+    if (!isNaN(parsed) && parsed >= 0.5 && parsed <= 1.5) {
+      return parsed;
+    }
+  }
+  return 0.78; // Default to a clear, learner-friendly pace (0.78x)
+}
+
+export function setAudioSpeed(speed: number): void {
+  if (typeof window !== "undefined") {
+    localStorage.setItem(AUDIO_SPEED_KEY, String(speed));
+  }
+}
+
+export function playAudio(text: string, rate?: number): Promise<void> {
   return new Promise((resolve) => {
     if (typeof window === "undefined" || !("speechSynthesis" in window)) {
       console.warn("SpeechSynthesis is not supported in this browser.");
@@ -18,13 +38,13 @@ export function playAudio(text: string, rate: number = 0.95): Promise<void> {
 
     const utterance = new SpeechSynthesisUtterance(cleanText);
     utterance.lang = "en-US";
-    utterance.rate = rate;
+    utterance.rate = rate !== undefined ? rate : getAudioSpeed();
     utterance.pitch = 1.0;
 
     // Pick a natural English voice if available
     const voices = window.speechSynthesis.getVoices();
     const englishVoice = voices.find(
-      (v) => (v.name.includes("Natural") || v.name.includes("Google") || v.name.includes("Samantha")) && v.lang.startsWith("en")
+      (v) => (v.name.includes("Natural") || v.name.includes("Google") || v.name.includes("Samantha") || v.name.includes("Jenny") || v.name.includes("Guy")) && v.lang.startsWith("en")
     ) || voices.find((v) => v.lang.startsWith("en"));
 
     if (englishVoice) {

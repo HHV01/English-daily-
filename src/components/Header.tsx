@@ -1,5 +1,6 @@
 import { LearnerProfile } from '../types';
 import { Calendar, User, BookMarked, MessageSquare, Flame, Sparkles, CheckCircle2, Table, Key } from 'lucide-react';
+import AudioSpeedButton from './AudioSpeedButton';
 
 interface Props {
   learnerProfile: LearnerProfile;
@@ -55,6 +56,9 @@ export default function Header({
 
         {/* Right: Actions */}
         <div className="flex items-center gap-2 sm:gap-2.5">
+          {/* Audio Speed Controller */}
+          <AudioSpeedButton />
+
           {/* Streak badge */}
           <div
             className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold"
