@@ -282,9 +282,6 @@ LƯU Ý RIÊNG CHO TUẦN 7 (HỆ THỐNG & LOGIC NGHIỆP VỤ):
             "dailyTip",
           ],
         },
-        thinkingConfig: {
-          thinkingBudget: 0,
-        },
       },
     });
 
@@ -326,9 +323,6 @@ YÊU CẦU:
         responseMimeType: "application/json",
         temperature: 0.2,
         maxOutputTokens: 800,
-        thinkingConfig: {
-          thinkingBudget: 0,
-        },
         responseSchema: {
           type: Type.OBJECT,
           properties: {
@@ -499,9 +493,6 @@ ${
         systemInstruction,
         temperature: 0.6,
         maxOutputTokens: 250,
-        thinkingConfig: {
-          thinkingBudget: 0,
-        },
       },
     });
 
