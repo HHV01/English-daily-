@@ -26,6 +26,38 @@ function getAiClient(req: express.Request): GoogleGenAI {
   });
 }
 
+// Resilient fallback models chain: If high-demand 503 or 429/404 occurs on one model, seamlessly failover to next
+const CANDIDATE_MODELS = [
+  "gemini-2.5-flash",
+  "gemini-2.0-flash",
+  "gemini-1.5-flash",
+  "gemini-3.6-flash",
+];
+
+async function generateContentWithFallback(ai: GoogleGenAI, requestParams: any): Promise<any> {
+  let lastError: any = null;
+
+  for (const model of CANDIDATE_MODELS) {
+    try {
+      const response = await ai.models.generateContent({
+        ...requestParams,
+        model,
+      });
+      if (response && (response.text || response.candidates)) {
+        return response;
+      }
+    } catch (err: any) {
+      lastError = err;
+      const msg = String(err?.message || err);
+      console.warn(`[AI Failover] Model '${model}' failed with error: ${msg}. Attempting next model...`);
+      // If it's a model-specific error (503 High Demand, 404 Not Found, 429 Rate limit, 400 Bad param), try next model
+      continue;
+    }
+  }
+
+  throw lastError;
+}
+
 // Helper to format Gemini API errors into actionable, easy-to-understand Vietnamese explanations
 function formatGeminiError(error: any, req?: express.Request): string {
   const customKey = req ? (req.headers['x-gemini-api-key'] as string) || req.body?.customApiKey || req.body?.learnerProfile?.customApiKey : null;
@@ -36,6 +68,9 @@ function formatGeminiError(error: any, req?: express.Request): string {
   const msg = error?.message || String(error);
   if (msg.includes("API_KEY_INVALID") || msg.includes("API key not valid") || msg.includes("forbidden") || msg.includes("403") || msg.includes("leaked")) {
     return "Mã GEMINI_API_KEY không hợp lệ hoặc đã bị vô hiệu hóa. Vui lòng bấm vào nút 🔑 'Cài đặt API Key' để dán mã Key mới từ Google AI Studio (https://aistudio.google.com/app/apikey).";
+  }
+  if (msg.includes("503") || msg.includes("high demand") || msg.includes("UNAVAILABLE") || msg.includes("overloaded")) {
+    return "Máy chủ Google Gemini AI hiện đang quá tải lượt truy cập toàn cầu (503 High Demand). Vui lòng đợi khoảng 10-20 giây rồi bấm 'Thử lại ngay'.";
   }
   if (msg.includes("429") || msg.includes("RESOURCE_EXHAUSTED") || msg.includes("Quota exceeded") || msg.includes("rate limit")) {
     return "Đã đạt giới hạn số lượt gọi Gemini API (Rate Limit / Quota). Vui lòng đợi khoảng 1 phút rồi nhấn Thử lại.";
@@ -126,8 +161,7 @@ LƯU Ý RIÊNG CHO TUẦN 7 (HỆ THỐNG & LOGIC NGHIỆP VỤ):
     `.trim();
 
     const ai = getAiClient(req);
-    const response = await ai.models.generateContent({
-      model: "gemini-3.6-flash",
+    const response = await generateContentWithFallback(ai, {
       contents: `Hãy tạo bài học chi tiết cho Tuần ${weekNumber}, ngày ${dayName} với chủ đề: "${dayTopic}". Trả về dữ liệu chuẩn JSON.`,
       config: {
         systemInstruction: systemPrompt,
@@ -316,8 +350,7 @@ YÊU CẦU:
     `.trim();
 
     const ai = getAiClient(req);
-    const response = await ai.models.generateContent({
-      model: "gemini-3.6-flash",
+    const response = await generateContentWithFallback(ai, {
       contents: prompt,
       config: {
         responseMimeType: "application/json",
@@ -394,16 +427,12 @@ YÊU CẦU ĐÁNH GIÁ (Nhanh gọn, súc tích):
     `.trim();
 
     const ai = getAiClient(req);
-    const response = await ai.models.generateContent({
-      model: "gemini-3.6-flash",
+    const response = await generateContentWithFallback(ai, {
       contents: prompt,
       config: {
         responseMimeType: "application/json",
         temperature: 0.2,
         maxOutputTokens: 800,
-        thinkingConfig: {
-          thinkingBudget: 0,
-        },
         responseSchema: {
           type: Type.OBJECT,
           properties: {
@@ -486,8 +515,7 @@ ${
     });
 
     const ai = getAiClient(req);
-    const response = await ai.models.generateContent({
-      model: "gemini-3.6-flash",
+    const response = await generateContentWithFallback(ai, {
       contents: formattedContents,
       config: {
         systemInstruction,
