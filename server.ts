@@ -269,6 +269,9 @@ CẤU TRÚC BÀI HỌC:
             "dailyTip",
           ],
         },
+        thinkingConfig: {
+          thinkingBudget: 0,
+        },
       },
     });
 
@@ -286,28 +289,20 @@ app.post("/api/gemini/evaluate-roleplay", async (req, res) => {
     const { learnerProfile, scenario, partnerMessage, userResponse } = req.body;
 
     const prompt = `
-Bạn là gia sư tiếng Anh cao cấp cho Kỹ sư Kiểm thử Phần mềm (QC/QA Engineer).
-Người học vừa thực hành trả lời một tình huống thực tế trong công việc tech.
+Bạn là gia sư tiếng Anh cho Kỹ sư Kiểm thử Phần mềm (QC/QA).
+Đánh giá câu trả lời thực tế của người học một cách súc tích, ngắn gọn, phản hồi nhanh:
 
-THÔNG TIN NGƯỜI HỌC:
-- Trình độ: ${learnerProfile?.level || "Intermediate"}
-- Vai trò: QC/QA Engineer
+TRÌNH ĐỘ: ${learnerProfile?.level || "Intermediate"}
+TÌNH HUỐNG: ${scenario || "Giao tiếp với Dev về bug"}
+CÂU CỦA ĐỐI TÁC/DEV: "${partnerMessage || ""}"
+CÂU CỦA NGƯỜI HỌC (QC): "${userResponse || ""}"
 
-TÌNH HUỐNG:
-${scenario || "Giao tiếp với Dev về bug"}
-
-CÂU/YÊU CẦU TỪ PHÍA DEV HOẶC ĐỐI TÁC:
-"${partnerMessage || ""}"
-
-CÂU TRẢ LỜI CỦA NGƯỜI HỌC (QC):
-"${userResponse || ""}"
-
-NHIỆM VỤ (Đánh giá súc tích, nhanh gọn):
-1. Đánh giá 1-100 điểm: Ngữ pháp, Độ tự nhiên, Thái độ.
-2. Điểm sáng (1-2 ý ngắn).
-3. Sửa lỗi ngữ pháp/từ vựng (nếu có, giải thích ngắn gọn 1 câu).
-4. Bản Formal (Jira/Email) & Bản Casual (Slack).
-5. Góp ý tone ngắn gọn & Lời khuyên 1 câu.
+YÊU CẦU:
+1. Chấm điểm 1-100 & nhận xét 1 câu ngắn.
+2. Điểm mạnh (tối đa 2 ý ngắn).
+3. Sửa lỗi ngữ pháp/từ vựng (nếu có, giải thích ngắn 1 câu).
+4. Bản Formal & Casual chuẩn bản xứ.
+5. Góp ý tone & Lời khuyên 1 câu.
     `.trim();
 
     const ai = getAiClient(req);
@@ -317,7 +312,10 @@ NHIỆM VỤ (Đánh giá súc tích, nhanh gọn):
       config: {
         responseMimeType: "application/json",
         temperature: 0.2,
-        maxOutputTokens: 1024,
+        maxOutputTokens: 800,
+        thinkingConfig: {
+          thinkingBudget: 0,
+        },
         responseSchema: {
           type: Type.OBJECT,
           properties: {
@@ -375,33 +373,17 @@ app.post("/api/gemini/evaluate-writing", async (req, res) => {
     const wordCount = words.length;
 
     const prompt = `
-Bạn là gia sư tiếng Anh giao tiếp chuyên sâu cho Kỹ sư Kiểm thử Phần mềm (QA/QC Engineer).
-Người học vừa hoàn thành bài "VIẾT NGẮN THEO CHỦ ĐỀ" (Short Writing Task) trong công việc thực tế.
-
-THÔNG TIN NGƯỜI HỌC:
+Bạn là gia sư tiếng Anh cho QA/QC Engineer. Đánh giá nhanh bài viết ngắn theo chủ đề:
 - Trình độ: ${learnerProfile?.level || "Intermediate"}
-- Vai trò: ${learnerProfile?.role || "QC/Tester phần mềm"}
+- Đề bài: ${writingTask?.titleVi || "Viết ngắn"} - ${writingTask?.promptVi || ""}
+- Bài làm của QC: "${userText || ""}" (${wordCount} từ)
 
-ĐỀ BÀI:
-- Tiêu đề: ${writingTask?.titleVi || "Viết ngắn công việc"}
-- Yêu cầu: ${writingTask?.promptVi || ""}
-- Ngữ cảnh: ${writingTask?.contextScenarioVi || ""}
-- Độ dài mục tiêu: ${writingTask?.targetLength || "3-5 câu (~50-80 từ)"}
-
-BÀI VIẾT CỦA NGƯỜI HỌC (QC):
-"${userText || ""}"
-(Số từ thực tế: ${wordCount} từ)
-
-NHIỆM VỤ CỦA BẠN (theo đúng quy tắc sư phạm):
-1. Sửa lỗi ngữ pháp/từ vựng/chính tả:
-   - Chỉ rõ từng lỗi cụ thể (original) -> cách sửa chính xác (corrected) -> giải thích ngắn gọn bằng tiếng Việt (explanationVi).
-2. Nhận xét về độ tự nhiên (naturalness): Câu văn có trôi chảy, đúng cách người bản xứ/dân Tech hay viết không?
-3. Nhận xét về tính phù hợp văn phong công sở (tone & formality): Đã đúng mức độ formal/casual theo bối cảnh (Jira/Email/Slack) chưa?
-4. Đưa ra 1 BẢN VIẾT MẪU THAM KHẢO (native-like sample) chuẩn Tech, súc tích, chuyên nghiệp để người học đối chiếu.
-5. Chấm điểm:
-   - score: Thang điểm 0 - 100
-   - rating1to5: Thang điểm 1 - 5 (1: Rất kém, 2: Cần cải thiện nhiều, 3: Tạm ổn, 4: Tốt, 5: Xuất sắc/gần như bản xứ)
-6. Đưa ra lời khích lệ ngắn gọn, truyền cảm hứng.
+YÊU CẦU ĐÁNH GIÁ (Nhanh gọn, súc tích):
+1. Sửa lỗi chính tả/ngữ pháp (tối đa 2-3 lỗi quan trọng nhất, giải thích 1 câu ngắn).
+2. Nhận xét độ tự nhiên (1 câu).
+3. Nhận xét phong văn Tech (1 câu).
+4. Viết 1 bản mẫu câu chuẩn súc tích (1-3 câu).
+5. Điểm số (0-100), sao (1-5) và lời khen ngắn gọn.
     `.trim();
 
     const ai = getAiClient(req);
@@ -411,7 +393,10 @@ NHIỆM VỤ CỦA BẠN (theo đúng quy tắc sư phạm):
       config: {
         responseMimeType: "application/json",
         temperature: 0.2,
-        maxOutputTokens: 1024,
+        maxOutputTokens: 800,
+        thinkingConfig: {
+          thinkingBudget: 0,
+        },
         responseSchema: {
           type: Type.OBJECT,
           properties: {
@@ -500,7 +485,10 @@ ${
       config: {
         systemInstruction,
         temperature: 0.6,
-        maxOutputTokens: 350,
+        maxOutputTokens: 250,
+        thinkingConfig: {
+          thinkingBudget: 0,
+        },
       },
     });
 
