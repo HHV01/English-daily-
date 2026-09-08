@@ -553,7 +553,7 @@ export default function ExercisesSection({
               </p>
 
               {/* Strengths */}
-              {evaluation.strengthsVi && evaluation.strengthsVi.length > 0 && (
+              {Array.isArray(evaluation.strengthsVi) && evaluation.strengthsVi.length > 0 && (
                 <div className="space-y-1">
                   <span className="text-[11px] font-bold text-slate-500 uppercase">
                     Điểm sáng:
@@ -567,7 +567,7 @@ export default function ExercisesSection({
               )}
 
               {/* Grammar & vocab fixes */}
-              {evaluation.grammarFixes && evaluation.grammarFixes.length > 0 && (
+              {Array.isArray(evaluation.grammarFixes) && evaluation.grammarFixes.length > 0 && (
                 <div className="space-y-2 pt-1">
                   <span className="text-[11px] font-bold text-rose-700 uppercase">
                     Gợi ý sửa câu chi tiết:

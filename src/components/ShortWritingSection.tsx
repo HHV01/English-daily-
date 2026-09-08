@@ -290,17 +290,22 @@ export default function ShortWritingSection({ task, learnerProfile, onWritingSub
                 <h4 className="text-sm font-bold text-slate-900">
                   Kết quả chấm bài viết ngắn
                 </h4>
-                <p className="text-xs text-slate-500">
-                  {evaluation.wordCount} từ • Đánh giá:{' '}
-                  {'★'.repeat(evaluation.rating1to5)}
-                  {'☆'.repeat(5 - evaluation.rating1to5)} ({evaluation.rating1to5}/5 sao)
-                </p>
+                {(() => {
+                  const safeRating = Math.max(1, Math.min(5, Math.round(Number(evaluation.rating1to5) || 4)));
+                  return (
+                    <p className="text-xs text-slate-500">
+                      {evaluation.wordCount || wordCount} từ • Đánh giá:{' '}
+                      {'★'.repeat(safeRating)}
+                      {'☆'.repeat(5 - safeRating)} ({safeRating}/5 sao)
+                    </p>
+                  );
+                })()}
               </div>
             </div>
 
             <div className="flex items-center gap-2">
               <span className="text-2xl font-black text-indigo-700">
-                {evaluation.score}
+                {Number(evaluation.score) || 0}
               </span>
               <span className="text-xs text-slate-500">/ 100 điểm</span>
             </div>
@@ -315,10 +320,10 @@ export default function ShortWritingSection({ task, learnerProfile, onWritingSub
           <div className="space-y-2">
             <div className="text-xs font-bold text-rose-800 uppercase tracking-wider flex items-center gap-1.5">
               <AlertCircle className="w-3.5 h-3.5" />
-              1. Sửa lỗi ngữ pháp, từ vựng & chính tả ({evaluation.grammarFixes?.length || 0} điểm cần lưu ý):
+              1. Sửa lỗi ngữ pháp, từ vựng & chính tả ({Array.isArray(evaluation.grammarFixes) ? evaluation.grammarFixes.length : 0} điểm cần lưu ý):
             </div>
 
-            {evaluation.grammarFixes && evaluation.grammarFixes.length > 0 ? (
+            {Array.isArray(evaluation.grammarFixes) && evaluation.grammarFixes.length > 0 ? (
               <div className="space-y-2">
                 {evaluation.grammarFixes.map((fix, fIdx) => (
                   <div
