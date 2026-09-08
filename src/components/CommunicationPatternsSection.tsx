@@ -130,11 +130,21 @@ export default function CommunicationPatternsSection({ patterns }: Props) {
               </div>
             </div>
 
+            {/* Detailed Grammar Breakdown */}
+            {item.detailedExplanationVi && (
+              <div className="text-[11.5px] sm:text-xs text-slate-700 bg-slate-100/80 border border-slate-200/70 px-3.5 py-2.5 rounded-xl leading-relaxed">
+                <strong className="font-bold text-slate-900">Giải thích chi tiết:</strong>{" "}
+                <span className="text-slate-700">{item.detailedExplanationVi}</span>
+              </div>
+            )}
+
             {/* Usage Note */}
-            <div className="text-[11px] text-slate-600 bg-slate-100/70 px-3 py-2 rounded-lg flex items-center gap-2">
-              <span className="font-semibold text-slate-700 shrink-0">💡 Lưu ý:</span>
-              <span>{item.usageNoteVi}</span>
-            </div>
+            {item.usageNoteVi && (
+              <div className="text-[11px] text-slate-600 bg-amber-50/50 border border-amber-100/80 px-3 py-2 rounded-lg flex items-start gap-2">
+                <span className="font-semibold text-amber-900 shrink-0">💡 Lưu ý:</span>
+                <span className="text-slate-700">{item.usageNoteVi}</span>
+              </div>
+            )}
           </div>
         ))}
       </div>

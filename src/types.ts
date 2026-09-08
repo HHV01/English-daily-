@@ -26,6 +26,7 @@ export interface CommunicationPattern {
   formal: string;
   casual: string;
   usageNoteVi: string;
+  detailedExplanationVi?: string; // Giải thích chi tiết: Cấu trúc chuẩn S + V + O + Modifier...
 }
 
 export interface DialogueMessage {

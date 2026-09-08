@@ -69,6 +69,7 @@ export const STARTER_LESSONS: Record<string, LessonData> = {
         contextVi: "Khi vừa phát hiện một lỗi nghiêm trọng cần thông báo ngay",
         formal: "I have logged a defect regarding the payment gateway timeout. Ticket reference is PAY-405.",
         casual: "Hey, just raised PAY-405 for the payment timeout bug. Could you take a quick look when free?",
+        detailedExplanationVi: "Cấu trúc chuẩn: S (I) + Present Perfect (have logged) + Object (a defect) + Prepositional phrase (regarding the payment gateway timeout). Mệnh đề 2: Noun phrase (Ticket reference) + Linking verb (is) + Noun (PAY-405).",
         usageNoteVi: "Dùng formal trong email / Jira; dùng casual kèm ticket ID khi ping trực tiếp trên Slack/Teams."
       },
       {
@@ -76,6 +77,7 @@ export const STARTER_LESSONS: Record<string, LessonData> = {
         contextVi: "Giải thích điểm bất thường trong tính năng",
         formal: "Contrary to the acceptance criteria, the submit button remains disabled even after all required fields are populated.",
         casual: "The submit button is still disabled even though I filled in all fields. It should be clickable.",
+        detailedExplanationVi: "Cấu trúc chuẩn: Prepositional phrase (Contrary to the acceptance criteria) + S (the submit button) + Linking verb (remains) + Adjective (disabled) + Concession clause (even after all required fields are populated).",
         usageNoteVi: "Cụm 'Contrary to acceptance criteria' thể hiện sự chắc chắn về mặt requirement."
       },
       {
@@ -83,6 +85,7 @@ export const STARTER_LESSONS: Record<string, LessonData> = {
         contextVi: "Chỉ rõ version, thiết bị hoặc dữ liệu test",
         formal: "This defect was observed in the Staging environment (build v2.4.1) using an admin test account.",
         casual: "Tested this on Staging build v2.4.1 with admin credentials and it happened again.",
+        detailedExplanationVi: "Cấu trúc chuẩn: S (This defect) + Passive voice verb (was observed) + Prepositional phrase of place (in the Staging environment) + Participial modifier (using an admin test account).",
         usageNoteVi: "Môi trường (Staging/UAT/Production) là thông tin bắt buộc mọi dev đều cần."
       }
     ],
@@ -762,6 +765,7 @@ export const STARTER_LESSONS: Record<string, LessonData> = {
         contextVi: "Nói ngắn gọn, súc tích trong 60-90 giây",
         formal: "Yesterday, I completed the regression test suite for the user profile module. Today, I am executing test cases for Stripe payment integration. Currently, I have no blockers.",
         casual: "Yesterday I wrapped up profile regression. Today I'm diving into Stripe payment test cases. All good on my end, no blockers!",
+        detailedExplanationVi: "Cấu trúc chuẩn 3 thì: 1) Yesterday (Time adverb) + S (I) + Past Simple (completed) + Object. 2) Today + S (I) + Present Continuous (am executing) + Object. 3) Currently + S (I) + Verb (have) + Negative object (no blockers).",
         usageNoteVi: "Luôn chốt bằng trạng thái Blocker để Scrum Master/PM nắm được."
       }
     ],
@@ -1258,18 +1262,20 @@ export const STARTER_LESSONS: Record<string, LessonData> = {
     ],
     communicationPatterns: [
       {
-        id: "p_w7_1",
-        pattern: "Could you walk me through the flow when [event/action happens]?",
-        usageVi: "Nhờ dev giải thích luồng xử lý của một chức năng hoặc tình huống cụ thể",
+        patternName: "Nhờ Dev giải thích luồng xử lý chi tiết (Walkthrough)",
+        contextVi: "Trước khi bắt đầu thiết kế test case cho chức năng mới",
         formal: "Could you please walk me through the end-to-end flow when a payment transaction is declined?",
-        casual: "Hey, can you walk me through the flow for cancelled orders real quick?"
+        casual: "Hey, can you walk me through the flow for cancelled orders real quick?",
+        detailedExplanationVi: "Cấu trúc chuẩn: Modal verb (Could) + S (you) + Adverb (please) + Phrasal Verb (walk me through) + Noun phrase (the end-to-end flow) + Time clause (when a payment transaction is declined).",
+        usageNoteVi: "Cụm 'walk me through' rất phổ biến trong môi trường Tech, thể hiện sự cầu thị và tôn trọng chuyên môn."
       },
       {
-        id: "p_w7_2",
-        pattern: "If [service/step] fails, what is the expected fallback behavior?",
-        usageVi: "Hỏi về kịch bản dự phòng khi một module gặp sự cố",
+        patternName: "Hỏi về cơ chế xử lý khi gặp sự cố (Fallback Behavior)",
+        contextVi: "Tìm hiểu kịch bản dự phòng khi dịch vụ hoặc API bị lỗi",
         formal: "If the primary database connection times out, what is the expected fallback behavior?",
-        casual: "What happens if the SMS provider goes down? Is there a backup OTP channel?"
+        casual: "What happens if the SMS provider goes down? Is there a backup OTP channel?",
+        detailedExplanationVi: "Cấu trúc chuẩn: Conditional clause (If the primary database connection times out) + Main clause (what is the expected fallback behavior).",
+        usageNoteVi: "Luôn hỏi rõ kịch bản fallback để tạo test case cho các tình huống thảm họa (disaster recovery)."
       }
     ],
     dialogue: {
@@ -1399,18 +1405,20 @@ export const STARTER_LESSONS: Record<string, LessonData> = {
     ],
     communicationPatterns: [
       {
-        id: "p_w7_3",
-        pattern: "Under what specific condition should [element/feature] be displayed?",
-        usageVi: "Hỏi rõ điều kiện kích hoạt hoặc hiển thị của một thành phần giao diện",
+        patternName: "Làm rõ điều kiện hiển thị của phần tử giao diện",
+        contextVi: "Xác minh logic hiển thị banner, nút bấm hoặc thông báo",
         formal: "Could you clarify under what specific conditions the promotional banner should be displayed?",
-        casual: "When exactly is the discount code input box visible to first-time users?"
+        casual: "When exactly is the discount code input box visible to first-time users?",
+        detailedExplanationVi: "Cấu trúc chuẩn: Modal verb (Could) + S (you) + Verb (clarify) + Prepositional question phrase (under what specific conditions) + S (the promotional banner) + Passive modal verb (should be displayed).",
+        usageNoteVi: "Dùng 'under what specific conditions' để yêu cầu BA/Dev liệt kê đầy đủ tất cả các trường hợp."
       },
       {
-        id: "p_w7_4",
-        pattern: "How does the formula handle [edge case, e.g., negative values / zero / maximum limits]?",
-        usageVi: "Hỏi về cách công thức tính toán xử lý trường hợp giá trị đặc biệt",
+        patternName: "Hỏi về cách tính toán trường hợp biên (Edge Case Formula)",
+        contextVi: "Kiểm tra giới hạn lớn nhất, nhỏ nhất, số âm hoặc số 0",
         formal: "How does the pricing formula handle edge cases where the discount exceeds the subtotal?",
-        casual: "What happens if someone enters 0 items in the quantity field?"
+        casual: "What happens if someone enters 0 items in the quantity field?",
+        detailedExplanationVi: "Cấu trúc chuẩn: Wh-question (How) + Auxiliary verb (does) + S (the pricing formula) + Verb (handle) + Object (edge cases) + Relative clause (where the discount exceeds the subtotal).",
+        usageNoteVi: "Đưa ra kịch bản cụ thể (ví dụ: giảm giá vượt quá tổng tiền) để đối chiếu quy tắc logic."
       }
     ],
     dialogue: {

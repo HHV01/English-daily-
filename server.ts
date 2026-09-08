@@ -87,6 +87,8 @@ CẤU TRÚC BÀI HỌC:
 2. MẪU CÂU GIAO TIẾP (3-5 mẫu)
    - Câu dùng thực tế đúng chủ đề của ngày
    - Có 2 phiên bản: formal (lịch sự/trang trọng) và casual (thân thiện/tự nhiên/thân mật)
+   - KÈM "detailedExplanationVi": Giải thích chi tiết cấu trúc ngữ pháp từng thành phần câu (Cấu trúc chuẩn: S + V + Object + Adverb/Preposition... hoặc phân tích mệnh đề phụ) để người học nắm chắc cách đặt câu.
+   - usageNoteVi: Mẹo ngữ cảnh áp dụng thực tế.
 
 3. HỘI THOẠI MẪU (1 đoạn 6-10 câu)
    - Tình huống đúng chủ đề của ngày (gặp gỡ, tán gẫu, rủ đi ăn trưa, kể chuyện vui, hoặc trao đổi công việc), có bản dịch tiếng Việt bên dưới mỗi câu
@@ -161,9 +163,13 @@ LƯU Ý RIÊNG CHO TUẦN 7 (HỆ THỐNG & LOGIC NGHIỆP VỤ):
                   contextVi: { type: Type.STRING },
                   formal: { type: Type.STRING },
                   casual: { type: Type.STRING },
+                  detailedExplanationVi: {
+                    type: Type.STRING,
+                    description: "Giải thích chi tiết cấu trúc ngữ pháp (vd: Cấu trúc chuẩn: S + modal verb (can) + V (reproduce) + Object (this bug) + Adverb (consistently) + Prepositional phrase (on Staging).)",
+                  },
                   usageNoteVi: { type: Type.STRING },
                 },
-                required: ["patternName", "formal", "casual", "usageNoteVi"],
+                required: ["patternName", "formal", "casual", "detailedExplanationVi", "usageNoteVi"],
               },
             },
             dialogue: {
