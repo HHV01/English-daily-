@@ -302,14 +302,12 @@ CÂU/YÊU CẦU TỪ PHÍA DEV HOẶC ĐỐI TÁC:
 CÂU TRẢ LỜI CỦA NGƯỜI HỌC (QC):
 "${userResponse || ""}"
 
-NHIỆM VỤ:
-1. Đánh giá câu trả lời trên thang điểm 1-100 dựa trên: Ngữ pháp, Độ tự nhiên trong môi trường IT/Agile, Thái độ (Chuyên nghiệp, xây dựng, tránh xung đột vô cớ).
-2. Chỉ ra điểm mạnh.
-3. Sửa lỗi ngữ pháp/từ vựng (nếu có) kèm giải thích tiếng Việt dễ hiểu.
-4. Cung cấp 2 phiên bản câu trả lời chuẩn bản xứ:
-   - Phiên bản Formal (cho Email, Ticket Jira hoặc Họp Sprint)
-   - Phiên bản Casual (cho Chat nhanh trên Slack / Teams)
-5. Lời khuyên về phong thái giao tiếp tech (Tone of Voice).
+NHIỆM VỤ (Đánh giá súc tích, nhanh gọn):
+1. Đánh giá 1-100 điểm: Ngữ pháp, Độ tự nhiên, Thái độ.
+2. Điểm sáng (1-2 ý ngắn).
+3. Sửa lỗi ngữ pháp/từ vựng (nếu có, giải thích ngắn gọn 1 câu).
+4. Bản Formal (Jira/Email) & Bản Casual (Slack).
+5. Góp ý tone ngắn gọn & Lời khuyên 1 câu.
     `.trim();
 
     const ai = getAiClient(req);
@@ -318,6 +316,8 @@ NHIỆM VỤ:
       contents: prompt,
       config: {
         responseMimeType: "application/json",
+        temperature: 0.2,
+        maxOutputTokens: 1024,
         responseSchema: {
           type: Type.OBJECT,
           properties: {
@@ -410,6 +410,8 @@ NHIỆM VỤ CỦA BẠN (theo đúng quy tắc sư phạm):
       contents: prompt,
       config: {
         responseMimeType: "application/json",
+        temperature: 0.2,
+        maxOutputTokens: 1024,
         responseSchema: {
           type: Type.OBJECT,
           properties: {
@@ -472,7 +474,7 @@ ${
     ? "- Warm, friendly, approachable and supportive friend/colleague.\n- Natural conversational tone with lively reactions ('Really?', 'No way!', 'That sounds awesome!'), asking follow-up questions, sharing relatable thoughts, small talk about life, weekend plans, hobbies, coffee, and food."
     : "- Professional IT workplace persona: Busy, practical, collaborative and appreciative when QC/team gives clear information, logs, or payload details."
 }
-- Keep responses concise and engaging (2 to 4 sentences maximum), authentic to real-life speaking or Slack/Teams chat.
+- Keep responses concise and engaging (2 to 3 sentences maximum), authentic to real-life speaking or Slack/Teams chat.
 - Speak in English first.
 - At the end of your response, provide a short friendly Vietnamese translation/hint in square brackets [Dịch: ...] to help the learner understand without leaving the roleplay.
     `.trim();
@@ -497,7 +499,8 @@ ${
       contents: formattedContents,
       config: {
         systemInstruction,
-        temperature: 0.7,
+        temperature: 0.6,
+        maxOutputTokens: 350,
       },
     });
 
