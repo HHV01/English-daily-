@@ -31,8 +31,8 @@ export default function CurriculumDrawer({
               <Calendar className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-bold text-slate-800 text-base">Lịch Xoay Vòng 6 Tuần</h3>
-              <p className="text-xs text-slate-500">Chương trình chuẩn cho QC/Tester giao tiếp Dev</p>
+              <h3 className="font-bold text-slate-800 text-base">Lộ Trình Xoay Vòng Toàn Diện</h3>
+              <p className="text-xs text-slate-500">7 Tuần Cốt Lõi + Chuyên Đề & Giao Tiếp Đời Sống</p>
             </div>
           </div>
           <button
@@ -50,7 +50,7 @@ export default function CurriculumDrawer({
             <span>Tiến độ hoàn thành:</span>
           </div>
           <span className="font-bold text-blue-700 bg-white px-2.5 py-0.5 rounded-full border border-blue-200 shadow-2xs">
-            {completedDays.length} / 36 bài học
+            {completedDays.length} / {WEEKS_SCHEDULE.reduce((acc, w) => acc + w.days.length, 0)} bài học
           </span>
         </div>
 

@@ -1201,5 +1201,278 @@ export const STARTER_LESSONS: Record<string, LessonData> = {
       adviceVi: "Để người nghe hào hứng, hãy dùng các từ thể hiện cảm xúc sống động như: 'Suddenly', 'Out of nowhere', 'To my surprise'. Và khi là người nghe, hãy luôn đệm các từ như 'Really?', 'No way!', 'That's insane!', 'I love that!'. Đó chính là chìa khóa kết nối con người với con người!",
       keyTakeawayEn: "Active listening and vibrant reactions turn simple chats into meaningful connections."
     }
+  },
+
+  "w7_T2": {
+    weekNumber: 7,
+    dayCode: "T2",
+    dayName: "Thứ Hai",
+    themeTitle: "TUẦN 7: HỆ THỐNG & LOGIC NGHIỆP VỤ",
+    lessonTitle: "Hỏi dev để hiểu luồng xử lý (system flow) của 1 chức năng trước khi test",
+    vocabulary: [
+      {
+        word: "system flow",
+        ipa: "/ˈsɪs.təm fləʊ/",
+        partOfSpeech: "noun",
+        meaningVi: "Luồng xử lý của hệ thống (từ đầu vào đến kết quả cuối cùng)",
+        exampleEn: "Could you walk me through the system flow for this checkout transaction?",
+        exampleVi: "Anh có thể giải thích giúp em luồng xử lý của giao dịch thanh toán này được không?",
+        tip: "Luôn hỏi hiểu luồng hệ thống trước khi bắt tay viết test case."
+      },
+      {
+        word: "trigger an event",
+        ipa: "/ˈtrɪɡ.ər ən ɪˈvent/",
+        partOfSpeech: "verb phrase",
+        meaningVi: "Kích hoạt một sự kiện / tiến trình xử lý ngầm",
+        exampleEn: "Clicking 'Confirm Order' will trigger a background job to generate an invoice.",
+        exampleVi: "Bấm 'Xác nhận đơn' sẽ kích hoạt một tiến trình chạy ngầm để tạo hóa đơn.",
+        tip: "Dùng để mô tả hành động khởi đầu của một chuỗi xử lý tự động."
+      },
+      {
+        word: "downstream service",
+        ipa: "/ˌdaʊn.striːm ˈsɜː.vɪs/",
+        partOfSpeech: "noun phrase",
+        meaningVi: "Dịch vụ tiếp nhận xử lý ở phía sau (hạ nguồn)",
+        exampleEn: "If the payment gateway is slow, it affects all downstream notification services.",
+        exampleVi: "Nếu cổng thanh toán bị chậm, nó sẽ ảnh hưởng đến tất cả các dịch vụ thông báo phía sau.",
+        tip: "Ngược lại với 'upstream service' (dịch vụ nguồn)."
+      },
+      {
+        word: "fallback mechanism",
+        ipa: "/ˈfɔːl.bæk ˈmek.ə.nɪ.zəm/",
+        partOfSpeech: "noun phrase",
+        meaningVi: "Cơ chế dự phòng khi có lỗi xảy ra",
+        exampleEn: "Is there a fallback mechanism in case the third-party OTP service is unreachable?",
+        exampleVi: "Có cơ chế dự phòng nào trong trường hợp dịch vụ OTP bên thứ ba không kết nối được không?",
+        tip: "Một câu hỏi cực kỳ giá trị của QC chuyên nghiệp để tìm ra edge case."
+      },
+      {
+        word: "cascading effect",
+        ipa: "/kæsˈkeɪ.dɪŋ ɪˈfekt/",
+        partOfSpeech: "noun phrase",
+        meaningVi: "Hiệu ứng dây chuyền (lỗi ở một chỗ kéo theo sập hàng loạt)",
+        exampleEn: "A failure in the auth token validation could cause a cascading effect across all APIs.",
+        exampleVi: "Lỗi ở khâu xác thực token có thể gây hiệu ứng dây chuyền trên toàn bộ các API.",
+        tip: "Dùng để cảnh báo mức độ rủi ro nghiêm trọng khi test tích hợp."
+      }
+    ],
+    communicationPatterns: [
+      {
+        id: "p_w7_1",
+        pattern: "Could you walk me through the flow when [event/action happens]?",
+        usageVi: "Nhờ dev giải thích luồng xử lý của một chức năng hoặc tình huống cụ thể",
+        formal: "Could you please walk me through the end-to-end flow when a payment transaction is declined?",
+        casual: "Hey, can you walk me through the flow for cancelled orders real quick?"
+      },
+      {
+        id: "p_w7_2",
+        pattern: "If [service/step] fails, what is the expected fallback behavior?",
+        usageVi: "Hỏi về kịch bản dự phòng khi một module gặp sự cố",
+        formal: "If the primary database connection times out, what is the expected fallback behavior?",
+        casual: "What happens if the SMS provider goes down? Is there a backup OTP channel?"
+      }
+    ],
+    dialogue: {
+      scenarioVi: "QC trao đổi với Senior Dev để hiểu luồng thanh toán trước khi test tích hợp.",
+      messages: [
+        {
+          speaker: "Alex (QC)",
+          roleTag: "QC Engineer",
+          textEn: "Hi David, I'm designing test cases for the new recurring subscription feature. Could you walk me through the backend flow?",
+          textVi: "Chào anh David, em đang viết test case cho tính năng gia hạn gói đăng ký tự động. Anh có thể giải thích giúp em luồng backend được không?"
+        },
+        {
+          speaker: "David (Dev)",
+          roleTag: "Senior Backend Dev",
+          textEn: "Sure! At midnight, a cron job scans for expired subscriptions and sends payment requests to Stripe in batches. Once Stripe responds with success, our webhook triggers an update to the user's entitlement table.",
+          textVi: "Được chứ! Nửa đêm, một cron job sẽ quét các gói hết hạn và gửi yêu cầu thanh toán sang Stripe theo lô. Khi Stripe báo thành công, webhook của mình sẽ kích hoạt cập nhật bảng quyền lợi người dùng."
+        },
+        {
+          speaker: "Alex (QC)",
+          roleTag: "QC Engineer",
+          textEn: "Got it. What happens if Stripe returns a network timeout or temporary failure? Is there an automatic retry mechanism?",
+          textVi: "Em hiểu rồi. Vậy nếu Stripe trả về lỗi timeout mạng hoặc sự cố tạm thời thì sao? Hệ thống có cơ chế thử lại tự động không?"
+        },
+        {
+          speaker: "David (Dev)",
+          roleTag: "Senior Backend Dev",
+          textEn: "Great question! We retry up to 3 times with exponential backoff before marking the status as 'Payment_Failed' and sending an email notification to the customer.",
+          textVi: "Câu hỏi rất hay! Hệ thống sẽ thử lại tối đa 3 lần với thời gian giãn cách tăng dần trước khi đánh dấu trạng thái 'Payment_Failed' và gửi email báo cho khách hàng."
+        }
+      ]
+    },
+    exercises: [
+      {
+        id: "ex_w7_1",
+        type: "multiple_choice",
+        promptVi: "Khi muốn nhờ Dev giải thích tuần tự các bước trong một luồng xử lý phức tạp, câu nào chuẩn nhất?",
+        options: [
+          "Could you walk me through the flow?",
+          "Can you run the system for me?",
+          "How to go through the program steps?",
+          "Explain the code line by line right now."
+        ],
+        correctAnswer: "Could you walk me through the flow?",
+        explanationVi: "'Walk someone through [something]' là cụm từ chuẩn bản xứ phổ biến nhất trong môi trường Tech, nghĩa là 'dẫn dắt / giải thích chi tiết từng bước cho ai đó'."
+      },
+      {
+        id: "ex_w7_2",
+        type: "fill_blank",
+        promptVi: "Điền thuật ngữ đúng: 'If the SMS service fails, we need a reliable ______ mechanism.'",
+        options: ["fallback", "failover", "backtrack", "rollback"],
+        correctAnswer: "fallback",
+        explanationVi: "'fallback mechanism' nghĩa là cơ chế dự phòng thay thế khi phương án chính gặp sự cố."
+      }
+    ],
+    roleplayPrompt: {
+      partnerName: "David (Senior Backend Dev)",
+      partnerRole: "Senior Backend Developer",
+      situationVi: "Dev vừa giải thích qua luồng xử lý đăng ký tài khoản nhưng chưa nói rõ điều gì xảy ra nếu email xác thực bị lỗi gửi.",
+      starterLineEn: "After the user fills out the form, we insert the record into the database and fire an event to send the verification email.",
+      starterLineVi: "Sau khi người dùng điền form, mình lưu bản ghi vào database và bắn ra một event để gửi email xác thực.",
+      sampleAnswerFormal: "Understood. What happens if the email service fails to deliver the verification code? Is the user allowed to request a resend?",
+      sampleAnswerCasual: "Got it! What if the email service fails or times out? Does the user see an error message with a 'Resend' button?"
+    },
+    shortWritingTask: {
+      titleVi: "Diễn giải lại luồng xử lý hệ thống (Rephrasing Flow)",
+      promptVi: "Viết một đoạn ngắn (3-5 câu) tóm tắt lại luồng xử lý đăng ký tài khoản và xử lý lỗi gửi email dựa trên cuộc trao đổi với Dev để xác nhận lại với cả team trên Jira/Slack.",
+      contextScenarioVi: "Sau khi nghe Dev giải thích, bạn viết lại tóm tắt luồng để làm tài liệu đối chiếu test case.",
+      targetLength: "3-5 câu (~50-80 từ)",
+      recommendedKeywords: ["system flow", "trigger", "verify", "fallback", "in case of failure"],
+      sentenceStarterEn: "To summarize the registration flow discussed with the dev team:",
+      guidelinesVi: [
+        "Liệt kê thứ tự các bước theo trình tự thời gian (First, then, subsequently)",
+        "Nêu rõ cơ chế xử lý khi gặp sự cố (In case of failure / If timeout occurs)",
+        "Dùng văn phong súc tích, rõ ràng chuẩn Tech"
+      ]
+    },
+    dailyTip: {
+      titleVi: "TIP KỸ THUẬT: Cách mô tả luồng nhiều bước súc tích (Rephrasing)",
+      adviceVi: "Khi trao đổi về luồng hệ thống, hãy dùng cấu trúc 3 thì kết nối: 'First, [User Action] triggers [Backend Service]. Then, [Service A] calls [Service B] via API. Finally, if [condition met], the database updates; otherwise, the fallback handles the error.' Cấu trúc này giúp Dev và PM thấy ngay bạn nắm rất chắc kiến trúc hệ thống!",
+      keyTakeawayEn: "Clarity in system flow explanation demonstrates professional technical competence."
+    }
+  },
+
+  "w7_T3": {
+    weekNumber: 7,
+    dayCode: "T3",
+    dayName: "Thứ Ba",
+    themeTitle: "TUẦN 7: HỆ THỐNG & LOGIC NGHIỆP VỤ",
+    lessonTitle: "Trao đổi về logic nghiệp vụ (business rule) — điều kiện hiển thị, công thức tính toán, quy tắc validate",
+    vocabulary: [
+      {
+        word: "business rule",
+        ipa: "/ˈbɪz.nɪs ruːl/",
+        partOfSpeech: "noun",
+        meaningVi: "Quy tắc nghiệp vụ (quy định cách phần mềm phải xử lý theo yêu cầu bài toán)",
+        exampleEn: "We need to verify if the business rule allows users under 18 to apply for this plan.",
+        exampleVi: "Chúng ta cần kiểm tra xem quy tắc nghiệp vụ có cho phép người dưới 18 tuổi đăng ký gói này không.",
+        tip: "Luôn bám sát business rule trong tài liệu SRS hoặc User Story."
+      },
+      {
+        word: "validation criteria",
+        ipa: "/ˌvæl.ɪˈdeɪ.ʃən kraɪˈtɪə.ri.ə/",
+        partOfSpeech: "noun phrase",
+        meaningVi: "Tiêu chí kiểm tra tính hợp lệ của dữ liệu đầu vào",
+        exampleEn: "The phone number field has strict validation criteria regarding country codes.",
+        exampleVi: "Trường số điện thoại có tiêu chí validate nghiêm ngặt liên quan đến mã quốc gia.",
+        tip: "Bao gồm độ dài, ký tự đặc biệt, định dạng regex..."
+      },
+      {
+        word: "edge case / boundary condition",
+        ipa: "/edʒ keɪs / ˈbaʊn.dər.i kənˈdɪʃ.ən/",
+        partOfSpeech: "noun phrase",
+        meaningVi: "Trường hợp biên / tình huống ngoại lệ ở rìa thông số",
+        exampleEn: "What is the expected calculation for an order total of exactly $0.00 after discount?",
+        exampleVi: "Cách tính dự kiến cho tổng đơn hàng đúng bằng 0.00$ sau khi giảm giá là gì?",
+        tip: "Nơi dễ xảy ra bug logic nhất trong phần mềm."
+      },
+      {
+        word: "data integrity",
+        ipa: "/ˈdeɪ.tə ɪnˈteɡ.rə.ti/",
+        partOfSpeech: "noun phrase",
+        meaningVi: "Tính toàn vẹn và nhất quán của dữ liệu",
+        exampleEn: "Database constraints ensure data integrity even if the client app crashes unexpectedly.",
+        exampleVi: "Ràng buộc cơ sở dữ liệu đảm bảo tính toàn vẹn dữ liệu ngay cả khi app client bị crash đột ngột.",
+        tip: "Quan trọng bậc nhất trong các hệ thống tài chính, ngân hàng, thương mại điện tử."
+      }
+    ],
+    communicationPatterns: [
+      {
+        id: "p_w7_3",
+        pattern: "Under what specific condition should [element/feature] be displayed?",
+        usageVi: "Hỏi rõ điều kiện kích hoạt hoặc hiển thị của một thành phần giao diện",
+        formal: "Could you clarify under what specific conditions the promotional banner should be displayed?",
+        casual: "When exactly is the discount code input box visible to first-time users?"
+      },
+      {
+        id: "p_w7_4",
+        pattern: "How does the formula handle [edge case, e.g., negative values / zero / maximum limits]?",
+        usageVi: "Hỏi về cách công thức tính toán xử lý trường hợp giá trị đặc biệt",
+        formal: "How does the pricing formula handle edge cases where the discount exceeds the subtotal?",
+        casual: "What happens if someone enters 0 items in the quantity field?"
+      }
+    ],
+    dialogue: {
+      scenarioVi: "QC thảo luận với Business Analyst và Dev về công thức tính thuế và phí ship.",
+      messages: [
+        {
+          speaker: "Alex (QC)",
+          roleTag: "QC Engineer",
+          textEn: "Sarah, I noticed an ambiguity in the shipping fee business rule. Does the free shipping threshold apply before or after applying coupon discounts?",
+          textVi: "Chị Sarah, em thấy có điểm chưa rõ ràng trong quy tắc phí ship. Ngưỡng miễn phí vận chuyển được áp dụng trước hay sau khi giảm giá mã coupon ạ?"
+        },
+        {
+          speaker: "Sarah (BA)",
+          roleTag: "Business Analyst",
+          textEn: "Good catch, Alex! The threshold is strictly evaluated against the final discounted subtotal, not the original price.",
+          textVi: "Phát hiện rất chuẩn, Alex! Ngưỡng đó chỉ được tính trên tổng tiền cuối cùng sau giảm giá, chứ không phải giá gốc."
+        },
+        {
+          speaker: "Alex (QC)",
+          roleTag: "QC Engineer",
+          textEn: "Thanks for clarifying. I will update the boundary test cases to cover orders that are exactly one cent above and below the threshold.",
+          textVi: "Cảm ơn chị đã làm rõ. Em sẽ cập nhật các test case kiểm tra giá trị biên quanh ngưỡng đó (lệch đúng 1 cent)."
+        }
+      ]
+    },
+    exercises: [
+      {
+        id: "ex_w7_3",
+        type: "multiple_choice",
+        promptVi: "Từ nào mô tả việc đảm bảo dữ liệu trong database luôn chính xác, không bị rác hay mất mát?",
+        options: ["Data integrity", "Data speed", "Data query", "Data visual"],
+        correctAnswer: "Data integrity",
+        explanationVi: "'Data integrity' nghĩa là tính toàn vẹn và độ tin cậy của dữ liệu trong toàn bộ vòng đời hệ thống."
+      }
+    ],
+    roleplayPrompt: {
+      partnerName: "Sarah (Business Analyst)",
+      partnerRole: "Business Analyst",
+      situationVi: "BA vừa gửi tài liệu cập nhật quy tắc tính điểm thưởng nhưng chưa giải thích trường hợp điểm bị số thập phân lẻ.",
+      starterLineEn: "Here is the updated logic: users earn 1.5 loyalty points for every $10 spent on the platform.",
+      starterLineVi: "Đây là logic cập nhật: người dùng nhận 1.5 điểm thưởng cho mỗi 10$ chi tiêu trên nền tảng.",
+      sampleAnswerFormal: "Thank you for the update. How should we handle fractional points? Should the system round up, round down, or maintain two decimal places?",
+      sampleAnswerCasual: "Thanks! What's the rounding rule for fractional points? Do we round down to the nearest integer?"
+    },
+    shortWritingTask: {
+      titleVi: "Làm rõ quy tắc nghiệp vụ & điều kiện biên (Clarifying Business Rules)",
+      promptVi: "Viết 1 đoạn tin nhắn ngắn (3-5 câu) gửi cho BA/Dev hỏi làm rõ quy tắc làm tròn số và xử lý khi người dùng áp dụng nhiều mã giảm giá cùng lúc.",
+      contextScenarioVi: "Bạn phát hiện nguy cơ bug khi người dùng nhập cùng lúc mã freeship và mã giảm 20%.",
+      targetLength: "3-5 câu (~50-80 từ)",
+      recommendedKeywords: ["business rule", "validation criteria", "edge case", "apply simultaneously", "rounding rule"],
+      sentenceStarterEn: "Hi team, regarding the multi-coupon business rule in story PRO-214:",
+      guidelinesVi: [
+        "Nêu rõ số User Story / Task Jira",
+        "Chỉ ra câu hỏi cụ thể về trường hợp biên (Edge Case)",
+        "Đề xuất 2 phương án xử lý khả dĩ để BA/Dev dễ chọn"
+      ]
+    },
+    dailyTip: {
+      titleVi: "TIP KỸ THUẬT: Đặt câu hỏi điều kiện 'What happens if...'",
+      adviceVi: "Khi hỏi về Business Rules, đừng hỏi chung chung như 'Is this correct?'. Hãy đưa ra con số và kịch bản cụ thể: 'What happens if a user applies a $50 voucher on a $40 cart? Does the remaining balance carry over, or is the total simply capped at $0?' Dev và BA sẽ cực kỳ nể phục sự sắc bén của bạn!",
+      keyTakeawayEn: "Concrete numbers and boundary scenarios make requirements crystal clear."
+    }
   }
 };
+

@@ -110,10 +110,17 @@ CẤU TRÚC BÀI HỌC:
      + guidelinesVi: Các lưu ý khi viết
      + recommendedKeywords: Các từ khóa gợi ý nên dùng
 
-6. TIP NGÀY: 1 mẹo về văn hóa giao tiếp công sở hoặc mẹo kết nối con người tự nhiên (công thức small talk, nghệ thuật lắng nghe, cách kể chuyện cuốn hút).
+6. TIP NGÀY: 
+   - Với tuần thông thường: 1 mẹo về văn hóa giao tiếp công sở hoặc kết nối con người tự nhiên (small talk, nghệ thuật lắng nghe).
+   - Riêng với TUẦN 7 (Hệ thống & Logic nghiệp vụ): Thay bằng "TIP KỸ THUẬT" — cách diễn đạt tiếng Anh sao cho vừa đúng thuật ngữ kỹ thuật vừa dễ hiểu cho người không chuyên (vd: cách nói "cascading effect", cách mô tả luồng nhiều bước súc tích).
+
+LƯU Ý RIÊNG CHO TUẦN 7 (HỆ THỐNG & LOGIC NGHIỆP VỤ):
+   - Từ vựng đa dạng theo lớp: tầng ứng dụng (frontend, backend, database, API, service, queue, cache), hành vi hệ thống (trigger, validate, sync, retry, timeout, fallback, dependency), logic nghiệp vụ (condition, business rule, edge case, data integrity).
+   - Hội thoại mẫu: QC đặt câu hỏi hiểu logic ("What happens if...", "Does this depend on...", "Is there a fallback when...").
+   - Viết ngắn: Tóm tắt lại 1 luồng xử lý bằng tiếng Anh sau khi nghe dev giải thích (kỹ năng rephrase/diễn giải luồng).
 
 7. ÔN TẬP NGẮN (nếu là cuối tuần/ôn tập):
-   - Tổng hợp 5 từ khó nhớ nhất, tóm tắt lời khuyên, đề viết tổng hợp dài hơn.
+   - Tổng hợp 5 từ/mẫu câu khó nhớ nhất, tóm tắt lời khuyên, đề viết tổng hợp dài hơn (~100-120 từ).
     `.trim();
 
     const ai = getAiClient(req);

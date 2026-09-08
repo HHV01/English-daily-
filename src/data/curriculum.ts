@@ -81,19 +81,32 @@ export const WEEKS_SCHEDULE: WeekSchedule[] = [
   },
   {
     weekNumber: 7,
-    themeTitle: "CHỦ ĐỀ CHUYÊN SÂU & ĐẶC THÙ",
-    themeDescription: "Automation, Performance, Security và Giao tiếp Khách hàng Quốc tế",
+    themeTitle: "HỆ THỐNG & LOGIC NGHIỆP VỤ",
+    themeDescription: "Hiểu luồng xử lý (System Flow), kiến trúc Microservices, Data Flow và quy tắc nghiệp vụ",
     days: [
-      { dayCode: "T2", dayLabel: "Chuyên đề 1", topic: "Automation test: báo cáo test tự động, giải thích script fail" },
-      { dayCode: "T3", dayLabel: "Chuyên đề 2", topic: "Performance/Load test: báo cáo benchmark, thảo luận ngưỡng tải" },
-      { dayCode: "T4", dayLabel: "Chuyên đề 3", topic: "Security test: báo cáo lỗ hổng bảo mật, mức độ nghiêm trọng" },
-      { dayCode: "T5", dayLabel: "Chuyên đề 4", topic: "Làm việc khách hàng nước ngoài: họp UAT, giải thích lỗi" },
-      { dayCode: "T6", dayLabel: "Chuyên đề 5", topic: "Cross-browser & Mobile testing: trao đổi tương thích thiết bị" },
-      { dayCode: "T7", dayLabel: "Tổng kết", topic: "Ôn tập chuyên đề nâng cao & Sẵn sàng phỏng vấn QC tiếng Anh", isReview: true },
+      { dayCode: "T2", dayLabel: "Thứ Hai", topic: "Hỏi dev để hiểu luồng xử lý (system flow) của 1 chức năng trước khi test" },
+      { dayCode: "T3", dayLabel: "Thứ Ba", topic: "Trao đổi về logic nghiệp vụ (business rule) — điều kiện hiển thị, công thức tính toán, quy tắc validate dữ liệu" },
+      { dayCode: "T4", dayLabel: "Thứ Tư", topic: "Thảo luận về luồng dữ liệu giữa các module/service (data flow) — frontend → API → database" },
+      { dayCode: "T5", dayLabel: "Thứ Năm", topic: "Hỏi/giải thích hành vi API (request/response, status code, error case)" },
+      { dayCode: "T6", dayLabel: "Thứ Sáu", topic: "Trao đổi về kiến trúc hệ thống ở mức QC cần biết (service dependency, điểm dễ lỗi tích hợp)" },
+      { dayCode: "T7", dayLabel: "Thứ Bảy / CN", topic: "Ôn tập tuần 7: Tổng hợp thuật ngữ Hệ thống, Logic & Tổng ôn toàn diện", isReview: true },
     ]
   },
   {
     weekNumber: 8,
+    themeTitle: "CHỦ ĐỀ ĐẶC THÙ & NÂNG CAO",
+    themeDescription: "Automation testing, Performance/Load test, Security và làm việc trực tiếp với Khách hàng Quốc tế",
+    days: [
+      { dayCode: "T2", dayLabel: "Thứ Hai", topic: "Automation test: báo cáo kết quả test tự động, giải thích script fail" },
+      { dayCode: "T3", dayLabel: "Thứ Ba", topic: "Performance/Load test: báo cáo benchmark, thảo luận ngưỡng chịu tải" },
+      { dayCode: "T4", dayLabel: "Thứ Tư", topic: "Security test: báo cáo lỗ hổng bảo mật, mức độ nghiêm trọng" },
+      { dayCode: "T5", dayLabel: "Thứ Năm", topic: "Làm việc khách hàng nước ngoài: họp UAT, giải thích lỗi cho khách hàng" },
+      { dayCode: "T6", dayLabel: "Thứ Sáu", topic: "Cross-browser & Mobile testing: tương thích thiết bị & OS" },
+      { dayCode: "T7", dayLabel: "Thứ Bảy / CN", topic: "Ôn tập tuần 8: Tổng kết chuyên đề đặc thù & Phỏng vấn QC tiếng Anh", isReview: true },
+    ]
+  },
+  {
+    weekNumber: 9,
     themeTitle: "GIAO TIẾP HÀNG NGÀY & SMALL TALK",
     themeDescription: "Chào hỏi, hỏi thăm, trò chuyện giờ ăn trưa, cà phê và kết nối tự nhiên giữa người với người",
     days: [
@@ -102,11 +115,11 @@ export const WEEKS_SCHEDULE: WeekSchedule[] = [
       { dayCode: "T4", dayLabel: "Thứ Tư", topic: "Hỏi thăm sở thích, phim ảnh, âm nhạc & thói quen hàng ngày" },
       { dayCode: "T5", dayLabel: "Thứ Năm", topic: "Khen ngợi, động viên & chúc mừng bạn bè/đồng nghiệp ('Good job!', 'Cheer up!')" },
       { dayCode: "T6", dayLabel: "Thứ Sáu", topic: "Kế hoạch cuối tuần & Tạm biệt ('Any plans for the weekend?', 'Have a great weekend!')" },
-      { dayCode: "T7", dayLabel: "Thứ Bảy / CN", topic: "Ôn tập tuần 8: Tổng hợp mẫu câu Small Talk & Giao lưu tự nhiên", isReview: true },
+      { dayCode: "T7", dayLabel: "Thứ Bảy / CN", topic: "Ôn tập tuần 9: Tổng hợp mẫu câu Small Talk & Giao lưu tự nhiên", isReview: true },
     ]
   },
   {
-    weekNumber: 9,
+    weekNumber: 10,
     themeTitle: "NGHỆ THUẬT KỂ CHUYỆN (STORYTELLING)",
     themeDescription: "Kể lại một sự việc, chia sẻ trải nghiệm cá nhân, bày tỏ cảm xúc và chia sẻ tin tức",
     days: [
@@ -115,11 +128,11 @@ export const WEEKS_SCHEDULE: WeekSchedule[] = [
       { dayCode: "T4", dayLabel: "Thứ Tư", topic: "Kể về một chuyến du lịch, một món ăn ngon hoặc địa điểm thú vị" },
       { dayCode: "T5", dayLabel: "Thứ Năm", topic: "Thể hiện sự lắng nghe & Phản hồi cảm xúc ('No way!', 'Really?', 'That sounds awesome!')" },
       { dayCode: "T6", dayLabel: "Thứ Sáu", topic: "Đúc kết & Chuyển chủ đề trong cuộc trò chuyện ('Long story short...', 'Anyway...')" },
-      { dayCode: "T7", dayLabel: "Thứ Bảy / CN", topic: "Ôn tập tuần 9: Luyện phản xạ kể chuyện mạch lạc & cuốn hút", isReview: true },
+      { dayCode: "T7", dayLabel: "Thứ Bảy / CN", topic: "Ôn tập tuần 10: Luyện phản xạ kể chuyện mạch lạc & cuốn hút", isReview: true },
     ]
   },
   {
-    weekNumber: 10,
+    weekNumber: 11,
     themeTitle: "ĐỜI SỐNG XÃ HỘI & GIAO LƯU QUỐC TẾ",
     themeDescription: "Tụ tập sau giờ làm, kết bạn mới, văn hóa ứng xử và giao tiếp khi ra nước ngoài",
     days: [
@@ -128,7 +141,7 @@ export const WEEKS_SCHEDULE: WeekSchedule[] = [
       { dayCode: "T4", dayLabel: "Thứ Tư", topic: "Từ chối lời mời khéo léo, không gây ngại ngùng ('I wish I could, but...')" },
       { dayCode: "T5", dayLabel: "Thứ Năm", topic: "Trao đổi về khác biệt văn hóa, phong tục & lối sống" },
       { dayCode: "T6", dayLabel: "Thứ Sáu", topic: "Giao tiếp đời thường khi đi du lịch (hỏi đường, gọi món, nhờ vả lịch sự)" },
-      { dayCode: "T7", dayLabel: "Thứ Bảy / CN", topic: "Ôn tập tuần 10: Tự tin giao tiếp đời sống như người bản xứ", isReview: true },
+      { dayCode: "T7", dayLabel: "Thứ Bảy / CN", topic: "Ôn tập tuần 11: Tự tin giao tiếp đời sống như người bản xứ", isReview: true },
     ]
   }
 ];

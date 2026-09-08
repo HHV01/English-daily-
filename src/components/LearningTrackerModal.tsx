@@ -262,7 +262,7 @@ export default function LearningTrackerModal({
           <div className="p-2 bg-white rounded-xl border border-blue-100 shadow-2xs">
             <span className="text-slate-500 block text-[11px]">Số ngày đã học</span>
             <span className="text-base sm:text-lg font-black text-blue-700">{totalDays}</span>
-            <span className="text-[10px] text-slate-400 block">/ 42 ngày (6 tuần)</span>
+            <span className="text-[10px] text-slate-400 block">bài học đã ghi nhận</span>
           </div>
           <div className="p-2 bg-white rounded-xl border border-blue-100 shadow-2xs">
             <span className="text-slate-500 block text-[11px]">Tổng từ mới đã nạp</span>
@@ -307,7 +307,7 @@ export default function LearningTrackerModal({
                   : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
               }`}
             >
-              Tổng Kết Mỗi Chủ Nhật (6 Tuần)
+              Tổng Kết Mỗi Chủ Nhật
             </button>
           </div>
 

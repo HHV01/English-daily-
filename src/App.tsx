@@ -511,7 +511,7 @@ export default function App() {
 
       {/* Footer */}
       <footer className="mt-12 py-6 bg-white border-t border-slate-200 text-center text-xs text-slate-400">
-        <p>QC English Daily • Giáo trình 6 tuần giao tiếp tiếng Anh công nghệ cho Software QC/Tester</p>
+        <p>QC English Daily • Lộ trình giao tiếp tiếng Anh công nghệ & đời sống cho Software QC/QA Engineer</p>
       </footer>
 
       {/* Modals */}
